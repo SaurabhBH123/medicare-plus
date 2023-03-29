@@ -1,5 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar1 from "./Components/Navbar/Navbar1.jsx"
+import SearchBar from './Components/Navbar/SearchBar';
+import Navbar2 from './Components/Navbar/Navbar2';
 
 function App() {
   return (
