@@ -5,19 +5,9 @@ import { useParams } from "react-router-dom";
 import { getProductsdetails } from "../../redux/ProductDetails/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-// import { ImStarEmpty } from "react-icons/im";
 // import { addCart } from "../../Redux/Cart/action";
 
 const SingleProduct = () => {
-//   const { data } = useSelector((state) => state.SingleProductReducer.products);
-//   console.log(data)
-//   const { id } = useParams();
-//   console.log(id)
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(getProductsdetails(id));
-//   }, [dispatch]);
 const [data, setData] = useState({})
   const dispatch = useDispatch();
 //   const navigate = useNavigate()
