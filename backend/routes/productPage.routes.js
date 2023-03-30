@@ -30,8 +30,45 @@ productPageRouter.post("/addmany", async (req,res) => {
 
 productPageRouter.get("/", async (req,res) => {
 
+   const {page,limit } = req.query;
+   const skip = (page - 1) * limit;
+
+   let obj = {};
+
+   for(let x in req.query){
+      if(x !=="page" && x !=="limit"){
+         obj[x] = req.query[x];
+      }
+   }
+   console.log(obj);
+
    try {
-      const data = await  ProductPageModel.find();
+      const data = await  ProductPageModel.find(obj).skip(skip).limit(limit);
+      res.status(200).send(data);
+   } catch (error) {
+      console.log(error);
+      res.status(400).send({"msg":"Some error"});
+   }   
+});
+
+productPageRouter.get("/:id", async (req,res) => {
+
+   const _id = req.params.id;
+   const {page,limit } = req.query;
+   const skip = (page - 1) * limit;
+
+   let obj = {};
+
+   for(let x in req.query){
+      if(x !=="page" && x !=="limit"){
+         obj[x] = req.query[x];
+      }
+   }
+   obj["_id"]= _id
+   console.log(obj);
+
+   try {
+      const data = await  ProductPageModel.find(obj).skip(skip).limit(limit);
       res.status(200).send(data);
    } catch (error) {
       console.log(error);
