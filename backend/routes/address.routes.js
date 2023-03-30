@@ -44,6 +44,21 @@ addressRouter.get("/", async (req,res) => {
    }   
 });
 
+addressRouter.get("/:id", async (req,res) => {
+   const token = req.headers.authorization.split(" ")[1];
+   const userID = jwt.verify(token, "subodh").userID;
+   
+   const query = req.query
+   query.userID = userID
+
+  try {
+     const data = await  AddressModel.find(query);
+     res.status(200).send(data);
+  } catch (error) {
+     console.log(error);
+     res.status(400).send({"msg":"Some error"});
+  }   
+});
 
 addressRouter.patch("/update/:id", async (req,res) => {
   const id = req.params.id;

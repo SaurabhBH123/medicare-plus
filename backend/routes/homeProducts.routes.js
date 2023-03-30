@@ -30,8 +30,10 @@ homeProductRouter.post("/addmany", async (req,res) => {
 
 homeProductRouter.get("/", async (req,res) => {
 
+   const query = req.query;
+
     try {
-       const data = await  HomeProductModel.find();
+       const data = await  HomeProductModel.find(query);
        res.status(200).send(data);
     } catch (error) {
        console.log(error);
