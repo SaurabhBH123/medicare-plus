@@ -4,6 +4,7 @@ import {
   ADMIN_GET_DATA_SUCCESS,
   ADMIN_POST_PRODUCT_SUCCESS,
   ADMIN_DELETE_PRODUCT_SUCCESS,
+  ADMIN_GET_SINGLE_DATA_SUCCESS,
 } from "./actionType";
 import axios from "axios";
 export const getRequestProduct = () => {
@@ -15,6 +16,9 @@ export const postProductSuccess = (payload) => {
 
 export const getSuccessProduct = (payload) => {
   return { type: ADMIN_GET_DATA_SUCCESS, payload };
+};
+export const getSuccessSingleProduct = (payload) => {
+  return { type: ADMIN_GET_SINGLE_DATA_SUCCESS, payload };
 };
 
 export const getFailureProduct = () => {
@@ -28,10 +32,20 @@ export const deleteProductSuccess = (payload) => {
 export const getProductData = (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .get(`http://localhost:3000/products`)
+    .get(`http://localhost:4300/productPage`)
     .then((res) => {
-      console.log(res.data);
       dispatch(getSuccessProduct(res.data));
+    })
+    .catch((e) => {
+      dispatch(getFailureProduct());
+    });
+};
+export const getSingleProductData = (id) => (dispatch) => {
+  dispatch(getRequestProduct());
+  axios
+    .get(`http://localhost:4300/productPage/${id}`)
+    .then((res) => {
+      dispatch(getSuccessSingleProduct(res.data));
     })
     .catch((e) => {
       dispatch(getFailureProduct());
@@ -40,7 +54,7 @@ export const getProductData = (dispatch) => {
 export const addProduct = (payload) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .post("http://localhost:3000/products", payload)
+    .post("http://localhost:4300/productPage/addone", payload)
     .then(() => {
       dispatch(postProductSuccess());
     })
@@ -51,7 +65,7 @@ export const addProduct = (payload) => (dispatch) => {
 export const deleteProductData = (id) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .delete(`http://localhost:3000/products/${id}`)
+    .delete(`http://localhost:4300/productPage/delete/${id}`)
     .then((res) => {
       console.log(res.data);
     })

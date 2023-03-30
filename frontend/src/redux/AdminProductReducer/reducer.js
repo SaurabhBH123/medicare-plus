@@ -2,6 +2,7 @@ import {
   ADMIN_GET_DATA_FAILURE,
   ADMIN_GET_DATA_REQUEST,
   ADMIN_GET_DATA_SUCCESS,
+  ADMIN_GET_SINGLE_DATA_SUCCESS,
   ADMIN_POST_PRODUCT_SUCCESS,
 } from "./actionType";
 
@@ -16,6 +17,8 @@ export const reducer = (state = inti, { type, payload }) => {
     case ADMIN_GET_DATA_REQUEST:
       return { ...state, isLoading: true };
     case ADMIN_GET_DATA_SUCCESS:
+      return { ...state, isLoading: false, products: payload };
+    case ADMIN_GET_SINGLE_DATA_SUCCESS:
       return { ...state, isLoading: false, products: payload };
     case ADMIN_POST_PRODUCT_SUCCESS:
       return { ...state, isLoading: false };

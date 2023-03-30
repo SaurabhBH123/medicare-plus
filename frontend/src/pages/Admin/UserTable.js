@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
   deleteProductData,
   getProductData,
-  getSingleProductData,
 } from "../../redux/AdminProductReducer/action";
-function Tables() {
-  const [deleteId, setDeleteId] = useState("");
-  // const [showModal, setShowModal] = useState(false);
+function UserTable() {
   const data = useSelector((store) => {
     return store?.adminProductReducer?.products;
   });
   // console.log("Data", data);
-  console.log("deleteId", deleteId);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,13 +16,7 @@ function Tables() {
   }, [data]);
 
   const removeProduct = (id) => {
-    const button = document.querySelector(".modal-close");
     dispatch(deleteProductData(id));
-    button.click();
-  };
-  const editProduct = (id) => {
-    dispatch(getSingleProductData(id));
-    console.log("id", id);
   };
 
   return (
@@ -374,7 +363,7 @@ function Tables() {
       <div class="py-4">
         <div class="d-flex justify-content-between w-100 flex-wrap">
           <div class="mb-3 mb-lg-0">
-            <h1 class="h4">Products tables</h1>
+            <h1 class="h4">Users Table</h1>
           </div>
         </div>
       </div>
@@ -385,15 +374,14 @@ function Tables() {
               <thead class="thead-light">
                 <tr>
                   <th class="border-0 rounded-start">Image</th>
-                  <th class="border-0">Pack_size</th>
-                  <th class="border-0">Title</th>
-                  <th class="border-0">Category</th>
-                  <th class="border-0">Price</th>
-                  <th class="border-0">MRP</th>
+                  <th class="border-0">Name</th>
+                  <th class="border-0">Email</th>
+                  <th class="border-0">Mobile</th>
+                  <th class="border-0">Gender</th>
                   <th class="border-0 rounded-end">Edit</th>
                 </tr>
               </thead>
-              <tbody>
+              {/* <tbody>
                 {data.length > 0 &&
                   data.map((item) => {
                     return (
@@ -414,7 +402,7 @@ function Tables() {
                         <td>
                           <p className="small">{item.category}</p>
                         </td>
-                        <td style={{ width: "10% !important;" }}>
+                        <td>
                           <b style={{ color: "green" }}>
                             {" "}
                             ₹ {item.final_price}
@@ -424,19 +412,10 @@ function Tables() {
                           <b>{item.MRP}</b>
                         </td>
                         <td>
-                          <Link to={"/edit-product"}>
-                            <span
-                              className="me-3"
-                              onClick={() => editProduct(item._id)}
-                            >
-                              Edit
-                            </span>
-                          </Link>
+                          <span className="me-3">Edit</span>
                           <span
-                            data-bs-toggle="modal"
-                            data-bs-target="#delete-modal"
                             style={{ cursor: "pointer", color: "red" }}
-                            onClick={() => setDeleteId(item._id)}
+                            onClick={() => removeProduct(item._id)}
                           >
                             Delete
                           </span>
@@ -444,49 +423,8 @@ function Tables() {
                       </tr>
                     );
                   })}
-              </tbody>
+              </tbody> */}
             </table>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="modal fade"
-        id="delete-modal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">
-                Are You sure want to Delete this product
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-
-            <div class="modal-footer text-center">
-              <button
-                type="button"
-                class="btn btn-secondary modal-close"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                onClick={() => removeProduct(deleteId)}
-              >
-                Delete
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -494,4 +432,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default UserTable;
