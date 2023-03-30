@@ -172,8 +172,12 @@ function Header() {
                 <span class="sidebar-text">Add Product</span>
               </Link>
             </li>
-            {/* <li class="nav-item">
-              <Link class="nav-link" to={{ pathname: "/settings" }}>
+            <li class="nav-item active">
+              <Link
+                class="nav-link"
+                to={{ pathname: "/user-list" }}
+                style={{ display: "flex" }}
+              >
                 <span class="sidebar-icon">
                   <svg
                     class="icon icon-xs me-2"
@@ -183,14 +187,15 @@ function Header() {
                   >
                     <path
                       fill-rule="evenodd"
-                      d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                      d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
                       clip-rule="evenodd"
                     ></path>
+                    <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
                   </svg>
                 </span>
-                <span class="sidebar-text">Settings</span>
+                <span class="sidebar-text">User List</span>
               </Link>
-            </li> */}
+            </li>
 
             {/* <li class="nav-item">
               <span

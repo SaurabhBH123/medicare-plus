@@ -11,7 +11,7 @@ let initialState = {
   avg_rating: "",
   total_ratings: "",
   discount: "",
-  product_title: "",
+  product_title: "test",
 };
 
 const AddProduct = () => {
@@ -20,7 +20,6 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, "value-", value);
     console.log(product);
     setProduct((prev) => {
       return {
@@ -32,7 +31,7 @@ const AddProduct = () => {
       };
     });
   };
-  const handleSubmit = (e) => {
+  const handleEditSubmit = (e) => {
     e.preventDefault();
     dispatch(addProduct(product));
     console.log(initialState);
@@ -44,10 +43,10 @@ const AddProduct = () => {
       <div class="row mt-3">
         <div class="col-12 col-xl-12">
           <div class="card card-body border-0 shadow mb-4">
-            <h2 class="h5 mb-4">Add Product Details</h2>
+            <h2 class="h5 mb-4">Edit Product Details</h2>
             <form
               onSubmit={(e) => {
-                handleSubmit(e);
+                handleEditSubmit(e);
               }}
             >
               <div class="row">
