@@ -4,27 +4,27 @@ import "./Product.css";
 // import { ImStarEmpty } from "react-icons/im";
 // import { FaCartPlus } from "react-icons/fa";
 // import { addCart } from "../../Redux/Cart/action";
-// import { useDispatch } from "react-redux";
-// import { getProductsdetails } from "../../Redux/ProductDetails/action";
-// import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { getProductsdetails } from "../../redux/ProductDetails/action";
+import { useNavigate } from "react-router-dom";
 
 export const ProductCard = ({ product }) => {
-//   const navigate = useNavigate();
-//   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 //   const handleAddToCart = (id) => {
 //     dispatch(addCart(id));
 //   };
 
-//   const handleDetails = (id) => {
-//     dispatch(getProductsdetails(id));
-//     navigate(`/products/${id}`);
-//   };
+  const handleDetails = (id) => {
+    dispatch(getProductsdetails(id));
+    navigate(`/products/${id}`);
+  };
 
   return (
     <div className="productCart_container">
       <div className="product_image"
-    //    onClick={() => handleDetails(product._id)}
+       onClick={() => handleDetails(product._id)}
        >
         <img src={product.image_url} alt="product"/>
       </div>

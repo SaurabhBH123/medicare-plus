@@ -13,13 +13,21 @@ import {
   Image,
   SimpleGrid,
 } from "@chakra-ui/react";
-import React from "react";
-import data from "../../db.json";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/Product/action";
 import "./Product.css";
 import { ProductCard } from "./ProductCard";
 
 const Product = () => {
-  console.log(data);
+  const { data } = useSelector((state) => state.ProductReducer.products);
+  const dispatch = useDispatch();
+    // console.log(compGlassesData)
+    // console.log(data)
+
+    useEffect(()=>{
+        dispatch(getProducts());
+    },[])
   return (
     <>
       <div className="main_container">
