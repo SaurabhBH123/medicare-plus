@@ -49,14 +49,23 @@ export default function Navbar1() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Box as={NavLink} to="/" cursor={"pointer"} >
-            <Img src={logo} alt={"logo"} w={["60px","90px","120px"]} />
+
+        <Flex
+          flex={{ base: 1 }}
+          justify={{ base: "center", md: "start", lg: "start" }}
+        >
+          <Box
+            as={NavLink}
+            to="/"
+            cursor={"pointer"}
+            border={"0px solid black"}
+          >
+            <Img src={logo} alt={"logo"} w={["60px", "90px", "100px"]}  h={["30px", "30px", "50px"]}/>
           </Box>
 
           <Flex
             display={{ base: "none", md: "none", lg: "flex" }}
-            alignItems={"start"}
+            alignItems={"center"}
             mx={"5px"}
             my={"5px"}
             border={"0px solid black"}
@@ -65,11 +74,13 @@ export default function Navbar1() {
           </Flex>
         </Flex>
 
-        <Stack
+        <Flex
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
           direction={"row"}
           spacing={2}
+          alignItems={"center"}
+          border={"0px solid black"}
           display={{ base: "none", md: "none", lg: "flex" }}
         >
           <NavLink to="/login">
@@ -88,20 +99,28 @@ export default function Navbar1() {
 
           <NavLink to="/signup">
             <Button
-            variant={"link"}
+              variant={"link"}
               fontSize={"sm"}
               fontWeight={400}
               color={useColorModeValue("gray.900")}
+              ml={'10px'}
             >
               Sign Up
             </Button>
           </NavLink>
-        </Stack>
+        </Flex>
 
-        <Flex justify="space-around" m={"0 20px"} gap={"20px"} align="center">
+        <Flex
+          justify="space-evenly"
+          gap={"10px"}
+          align="center"
+          border={"0px solid red"}
+          ml={"20px"}
+        >
           <Text
             as="p"
             cursor={"pointer"}
+            mt={"15px"}
             display={{ base: "none", md: "none", lg: "flex" }}
           >
             Offer
@@ -116,6 +135,7 @@ export default function Navbar1() {
           </RouterLink>
           <Text
             as="p"
+            mt={"15px"}
             cursor="pointer"
             display={{ base: "none", md: "none", lg: "flex" }}
             fontSize={"14px"}
@@ -135,14 +155,21 @@ export default function Navbar1() {
 const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("#ff6f61", "white");
   return (
-    <Stack direction={"row"} spacing={4} align={"center"}>
+    <Stack
+      direction={"row"}
+      spacing={4}
+      alignItems={"center"}
+      m={"auto"}
+      justifyContent={"center"}
+    >
       {NAV_ITEMS.map((navItem, i) => (
-        <Box key={navItem.label}>
+        <Flex key={navItem.label}  justifyContent={'center'} alignItems={'center'}>
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <NavLink to={navItem.href}>
                 <Text
                   p={2}
+                  border={"0px solid green"}
                   fontSize={"md"}
                   fontWeight={700}
                   fontFamily="Clear Sans"
@@ -156,7 +183,7 @@ const DesktopNav = () => {
               </NavLink>
             </PopoverTrigger>
           </Popover>
-        </Box>
+        </Flex>
       ))}
     </Stack>
   );
