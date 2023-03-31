@@ -28,12 +28,12 @@ const Footer1 = () => {
             in 1000+ cities till date, we are on a mission to bring "care" to
             "health" to give you a flawless healthcare experience.
           </Text>
-        <Box pt="2">
+        <Box pt="2" display={['none','none','none','block','block']}>
           <Text as="b" fontSize="18px">
             Tata 1mg: Your Favourite Online Pharmacy!
           </Text>
         </Box>
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             Tata 1mg is India's leading online chemist with over 2 lakh
             medicines available at the best prices. We are your one-stop
             destination for other healthcare products as well, such as over the
@@ -51,20 +51,20 @@ const Footer1 = () => {
             In case you need assistance, just give us a call and we will help
             you complete your order.
           </Text>
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             And there is more! At Tata 1mg, you can buy health products and
             medicines online at best discounts.
           </Text>
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             Now, isn't that easy? Why go all the way to the medicine store and
             wait in line, when you have Tata 1mg Pharmacy at your service.
           </Text>
-        <Box pt="2">
+        <Box pt="2" display={['none','none','none','block','block']}>
           <Text as="b" fontSize="18px">
             The Feathers in Our Cap
           </Text>
         </Box>
-        <Box py="2">
+        <Box py="2" display={['none','none','none','block','block']}>
           <Text textAlign="justify">
             At Tata 1mg, our goal is to make healthcare understandable,
             accessible and affordable in India. We set out on our journey in
@@ -92,7 +92,7 @@ const Footer1 = () => {
         </Box>
 
         <Box pt="2">
-          <Text as="b" fontSize="18px">
+          <Text as="b" fontSize="18px" display={['none','none','none','block','block']}>
             The Services We Offer
           </Text>
         </Box>
@@ -107,20 +107,20 @@ const Footer1 = () => {
             help people use their medicines effectively and safely.
           </Text>
 
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             We also facilitate lab tests at home. You can avail over 2,000 tests
             and get tested by 120+ top and verified labs at the best prices.
             Need to consult a doctor? On our platform, you can talk to over 20
             kinds of specialists in just a few clicks.
           </Text>
 
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             Customer centricity is the core of our values. Our team of highly
             trained and experienced doctors, phlebotomists and pharmacists looks
             into each order to give you a fulfilling experience.
           </Text>
 
-          <Text textAlign="justify">
+          <Text textAlign="justify" display={['none','none','none','block','block']}>
             We’ve made healthcare accessible to millions by giving them quality
             care at affordable prices. Customer centricity is the core of our
             values. Our team of highly trained and experienced doctors,

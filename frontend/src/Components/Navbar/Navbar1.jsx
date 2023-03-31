@@ -3,27 +3,29 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   useColorModeValue,
   useDisclosure,
   Divider,
   Img,
+  Center,
 } from "@chakra-ui/react";
 
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../../Images/logo.png";
-import { Link as RouterLink, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { NAV_ITEMS, AUTH_ITEMS } from "../../utils/navbar.data.js";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import LoginCommon from "../Login/LoginCommon";
 
 export default function Navbar1() {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
+  const [isLogin, SetIsLogin] = useState(false);
 
   return (
     <Box>
@@ -60,85 +62,80 @@ export default function Navbar1() {
             cursor={"pointer"}
             border={"0px solid black"}
           >
-            <Img src={logo} alt={"logo"} w={["60px", "90px", "100px"]}  h={["30px", "30px", "50px"]}/>
+            <Img
+              src={logo}
+              alt={"logo"}
+              w={["60px", "90px", "100px"]}
+              h={["30px", "30px", "30px"]}
+            />
           </Box>
 
           <Flex
             display={{ base: "none", md: "none", lg: "flex" }}
             alignItems={"center"}
             mx={"5px"}
-            my={"5px"}
             border={"0px solid black"}
           >
             <DesktopNav />
           </Flex>
         </Flex>
 
-        <Flex
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={2}
-          alignItems={"center"}
-          border={"0px solid black"}
-          display={{ base: "none", md: "none", lg: "flex" }}
-        >
-          <NavLink to="/login">
-            <Button
-              color={useColorModeValue("gray.900")}
-              fontSize={"sm"}
-              fontWeight={400}
-              variant={"link"}
-              borderRight={"1px solid"}
-              borderRadius="none"
-              pr={"10px"}
-            >
-              Login
-            </Button>
-          </NavLink>
+      
+          <Text
+            color={useColorModeValue("gray.900")}
+            fontSize={"sm"}
+            fontWeight={400}
+            _hover={{ cursor: "pointer", textDecoration: "underline" }}
+            borderRadius="none"
+            pr={"10px"}
+            onClick={onOpen}
+          >
+            Login | Sign up
+          </Text>
 
-          <NavLink to="/signup">
-            <Button
-              variant={"link"}
-              fontSize={"sm"}
-              fontWeight={400}
-              color={useColorModeValue("gray.900")}
-              ml={'10px'}
-            >
-              Sign Up
-            </Button>
-          </NavLink>
-        </Flex>
-
+        
+        <LoginCommon
+          isOpen={isOpen}
+          onClose={onClose}
+          isLogin={isLogin}
+          SetIsLogin={SetIsLogin}
+          details={{
+            Title: "Login",
+            desc: "Get access to your orders, lab tests & doctor consultations",
+            inputLabel: "Email",
+            inputWarning: "Please enter a valid Email ID",
+            buttonTitle: "LOGIN",
+            one: "New on 1mg? Sign Up",
+            two: `By logging in, you agree to our
+                Terms and Conditions & Privacy Policy`,
+            three: "Need Help? Get In Touch",
+          }}
+        />
         <Flex
-          justify="space-evenly"
-          gap={"10px"}
-          align="center"
+          gap={"15px"}
+          spacing={0}
+          lineHeight="tight"
           border={"0px solid red"}
           ml={"20px"}
         >
           <Text
-            as="p"
             cursor={"pointer"}
-            mt={"15px"}
+            mt={"1px"}
             display={{ base: "none", md: "none", lg: "flex" }}
           >
             Offer
           </Text>
-          <RouterLink to="/cart">
-            <FaShoppingCart
-              //   color={ ? "#ff6f61" : "#000"}
-              color={"#000"}
-              fontSize={"20px"}
-              cursor="pointer"
-            />
-          </RouterLink>
+          <Icon
+            as={FaShoppingCart}
+            w={4}
+            h={4}
+            mt={1.5}
+            _hover={{ cursor: "pointer" }}
+          />
+
           <Text
-            as="p"
-            mt={"15px"}
             cursor="pointer"
             display={{ base: "none", md: "none", lg: "flex" }}
-            fontSize={"14px"}
           >
             Need Help?
           </Text>
@@ -157,21 +154,26 @@ const DesktopNav = () => {
   return (
     <Stack
       direction={"row"}
-      spacing={4}
+      spacing={[1, 2, 3]}
       alignItems={"center"}
       m={"auto"}
       justifyContent={"center"}
     >
       {NAV_ITEMS.map((navItem, i) => (
-        <Flex key={navItem.label}  justifyContent={'center'} alignItems={'center'}>
+        <Flex
+          key={navItem.label}
+          justifyContent={"center"}
+          alignItems={"center"}
+          display={["none", "none", "none", "none", "flex"]}
+        >
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <NavLink to={navItem.href}>
                 <Text
-                  p={2}
+                  p={0}
                   border={"0px solid green"}
-                  fontSize={"md"}
-                  fontWeight={700}
+                  fontSize={["sm", "md", "md"]}
+                  fontWeight={[400, 500, 700]}
                   fontFamily="Clear Sans"
                   _hover={{
                     textDecoration: "none",

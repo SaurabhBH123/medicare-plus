@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Image, Flex, Show, Text } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Image, Flex, Show, Text, Stack } from "@chakra-ui/react";
 import React from "react";
 
 const Footer3 = () => {
@@ -186,15 +186,15 @@ const Footer3 = () => {
             w="100%"
             textAlign={{ base: "center", sm: "center", md: "left", lg: "left" }}
           >
-            <Box>
-              <Box my="4">
-                <Text as="b" fontSize="16px" color="#000000">
+            <Box textAlign={'center'}>
+             
+                <Text as="b" my="4" fontSize="16px" color="#000000">
                   Download App
                 </Text>
-              </Box>
+            
               <Flex
                 flexDirection={["row", "row", "column"]}
-                justifyContent={"space-between"}
+                justifyContent={"center"}
                 alignItems={"center"}
                 margin={"auto"}
               >

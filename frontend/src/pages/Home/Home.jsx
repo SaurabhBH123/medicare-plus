@@ -1,20 +1,30 @@
+import React, { useEffect, useState } from "react";
 import {
   Box,
+  Button,
   Center,
   Divider,
+  Flex,
   Grid,
   GridItem,
   Img,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import axios from "axios";
 import AutomaticCarousel from "../../Components/Carousels/AutomaticCarousels.jsx";
 import { AutoSliderImg } from "../../utils/autoslider.js";
 import { DiseaseData } from "../../utils/disease.data.js";
 import ManualCarousels from "../../Components/Carousels/ManualCarousels.jsx";
 import { FeaturedBrandData } from "../../utils/FeaturedBrand.data.js";
-
+import ManualCarouselHomeCard from "../../Components/Carousels/ManualCarouselHomeCard.jsx";
+import { popularComboDealsURL, bpMonitorURL } from "../../utils/url.js";
+import { ayurvedaSectionData } from "../../utils/ayurvedaBrands.data.js";
+import { Loader1 } from "../../Components/Loader/Loader.jsx";
+import { LoginDetails } from "./LoginDetails.jsx";
 const Home = () => {
+  const [comboData, setComboData] = useState([]);
+  const [monintorData, setMonitorData] = useState([]);
+  const [isLoading,setIsLoading]=useState(false)
   const categoryStyle = {
     width: "90%",
     fontSize: "18px",
@@ -24,8 +34,45 @@ const Home = () => {
     border: "0px solid red",
     margin: "auto",
   };
+
+  const popularComboDealsData = async () => {
+    setIsLoading(true)
+    try {
+      let res = await axios.get(popularComboDealsURL);
+      let arr = [];
+      for (let i = 0; i < 10; i++) {
+        arr.push(res.data[i]);
+      }
+      setComboData(arr);
+      setIsLoading(false)
+    } catch (err) {
+      setIsLoading(false)
+      console.log(err);
+    }
+  };
+  const bpMonintorData = async () => {
+    setIsLoading(true)
+    try {
+      let res = await axios.get(bpMonitorURL);
+      let arr = [];
+      for (let i = 0; i < 10; i++) {
+        arr.push(res.data[i]);
+      }
+      setMonitorData(arr);
+      setIsLoading(false)
+    } catch (err) {
+      setIsLoading(false)
+      console.log(err);
+    }
+  };
+  console.log(comboData, monintorData);
+  useEffect(() => {
+    popularComboDealsData();
+    bpMonintorData();
+  }, []);
   return (
     <>
+    <LoginDetails/>
       <Box pt={"5px"} w={"95%"} m={"auto"}>
         {/* auto slider */}
         <Grid
@@ -46,12 +93,12 @@ const Home = () => {
           </GridItem>
         </Grid>
         {/* tata 1mg name */}
-        <Center pt={[1, 2, 5]} border={"1px solid red"}>
+        <Center pt={[0, 0, 1, 1, 2]} border={"0px solid red"}>
           <Text
-            fontSize={{ base: "12px", sm: "16px", md: "20px", lg: "24px" }}
+            fontSize={["10px", "12px", "18px", "20px", "24px"]}
             color="#666666"
           >
-            Tata 1mg: India’s Leading Online Pharmacy & Healthcare Platform
+            Medicare: India’s Leading Online Pharmacy & Healthcare Platform
           </Text>
         </Center>
       </Box>
@@ -69,22 +116,67 @@ const Home = () => {
           />
         </Box>
       </Box>
+      {/* Shop by Health Concerns */}
       <Box m="auto" pt={[3, 2, 5]} bg="rgb(246,246,246)">
         <Text style={categoryStyle}>Shop by Health Concerns</Text>
-        <Box bgColor={'white'} pt={[1,2,5]}>
-
-        <ManualCarousels allData={DiseaseData} />
+        <Box bgColor={"white"} pt={[1, 2, 5]}>
+          <ManualCarousels allData={DiseaseData} />
         </Box>
       </Box>
+      {/* Featured brands */}
       <Box m="auto" pt={[3, 2, 5]} bg="rgb(246,246,246)">
         <Text style={categoryStyle}>Featured brands</Text>
-        <Box bgColor={'white'} pt={[1,2,5]}>
-        <ManualCarousels allData={FeaturedBrandData} />
+        <Box bgColor={"white"} pt={[1, 2, 5]}>
+          <ManualCarousels allData={FeaturedBrandData} />
         </Box>
       </Box>
-    
-
-    
+      {/* BP monitors Data */}
+      <Box m="auto" pt={[3, 2, 5]} bg="rgb(246,246,246)">
+        <Flex style={categoryStyle} justifyContent={"space-between"}>
+          <Text style={categoryStyle}>BP Monitors</Text>
+          <Button
+            size={"sm"}
+            fontWeight={"light"}
+            color={"white"}
+            bgColor={"rgb(255,111,97)"}
+            _hover={{ bg: "rgb(255,111,97)" }}
+            py={0}
+          >
+            See all
+          </Button>
+        </Flex>
+        <Box bgColor={"white"} pt={[1, 2, 5]}>
+          {isLoading?<Loader1/>:
+          <ManualCarouselHomeCard allData={monintorData} />}
+        </Box>
+      </Box>
+      {/* Popular Combo Deals */}
+      <Box m="auto" pt={[3, 2, 5]} bg="rgb(246,246,246)">
+        <Flex style={categoryStyle} justifyContent={"space-between"}>
+          <Text style={categoryStyle}>Popular Combo Deals</Text>
+          <Button
+            size={"sm"}
+            fontWeight={"light"}
+            color={"white"}
+            bgColor={"rgb(255,111,97)"}
+            _hover={{ bg: "rgb(255,111,97)" }}
+            py={0}
+          >
+            See all
+          </Button>
+        </Flex>
+        <Box bgColor={"white"} pt={[1, 2, 5]}>
+          {isLoading?<Loader1/>:
+          <ManualCarouselHomeCard allData={comboData} />}
+        </Box>
+      </Box>
+      {/* Ayurveda top brands */}
+      <Box m="auto" pt={[3, 2, 5]} bg="rgb(246,246,246)">
+        <Text style={categoryStyle}>Ayurveda top brands </Text>
+        <Box bgColor={"white"} pt={[1, 2, 5]}>
+          <ManualCarousels allData={ayurvedaSectionData} />
+        </Box>
+      </Box>
     </>
   );
 };
