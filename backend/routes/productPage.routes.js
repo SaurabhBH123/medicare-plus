@@ -29,21 +29,35 @@ productPageRouter.post("/addmany", async (req,res) => {
 });
 
 productPageRouter.get("/", async (req,res) => {
-
-   const {page,limit } = req.query;
+   const {page,limit,sort } = req.query;
    const skip = (page - 1) * limit;
 
    let obj = {};
-
+   
+    console.log("This is query:-",req.query);
    for(let x in req.query){
-      if(x !=="page" && x !=="limit"){
-         obj[x] = req.query[x];
+      if(x !=="page" && x !=="limit" && x !== "sort"){
+        
+            obj[x] = req.query[x];
+         
       }
    }
+
+   console.log(sort);
+
+   let sorting = {};
+
+   if(sort === "asc"){
+       sorting =  {MRP: 1};
+   }else if(sort === "desc"){
+       sorting =  {MRP: -1};
+   }
+
+   
    console.log(obj);
 
    try {
-      const data = await  ProductPageModel.find(obj).skip(skip).limit(limit);
+      const data = await  ProductPageModel.find(obj).skip(skip).limit(limit).sort(sorting)
       res.status(200).send(data);
    } catch (error) {
       console.log(error);
