@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./SingleProduct.css";
 import { useParams } from "react-router-dom";
-import { getProductsdetails } from "../../redux/ProductDetails/action";
-import { useDispatch, useSelector } from "react-redux";
+// import { getProductsdetails } from "../../redux/ProductDetails/action";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 // import { addCart } from "../../Redux/Cart/action";
 
@@ -13,7 +13,7 @@ const [data, setData] = useState({})
 //   const navigate = useNavigate()
   // console.log(user)
   const {id} = useParams()
-  console.log(id)
+  // console.log(id)
 //   const addToCart=()=>{
 //     setData({...data , qty:1})
 //     dispatch(addProductToCart(user,data))
@@ -22,7 +22,7 @@ const [data, setData] = useState({})
   const fetchSingleProduct=(id)=>{
     axios(`http://localhost:4300/productPage?_id=${id}`)
     // .then(res=>setData(res.data[0]))
-    .then(res=>console.log(res))
+    .then(res=>setData(res.data[0]))
      .catch(err=>console.log(err))
   }
   // console.log(data)
@@ -42,41 +42,15 @@ const [data, setData] = useState({})
   return (
     <div id="product">
       <div className="productdel">
-        {/* <div className="productimg">
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-          <img
-            src="https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"
-            alt="a"
-          />
-        </div> */}
 
         <div className="producttop">
         
 
-         <img src={data?.imageUrl || "https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"}  alt="products_id" />
+         <img src={data?.image_url || "https://onemg.gumlet.io/images/q_auto,h_150,w_150,c_fit,f_auto/qh1au45w8u7cfvf3lg3i/tata-1mg-women-s-multivitamin-zinc-vitamin-c-calcium-vitamin-d-and-iron-immunity-booster-tablet.jpg"}  alt="products_id" />
         </div>
         <div className="productheding">
           <h1>
-            {data?.productName || "Tata 1mg Women's Multivitamin, Zinc, Vitamin C, Calcium, Vitamin D, and Iron Immunity Booster Tablet"}
+            {data?.product_title || "Tata 1mg Women's Multivitamin, Zinc, Vitamin C, Calcium, Vitamin D, and Iron Immunity Booster Tablet"}
           </h1>
 
           <div
@@ -101,7 +75,7 @@ const [data, setData] = useState({})
               margin: "10px",
             }}
           >
-             {data?.ratings || "3.5"} 
+             {data?.avg_rating || "3.5"} 
           </div>
           <p
             style={{
@@ -111,7 +85,7 @@ const [data, setData] = useState({})
               color: "#ff6f61",
             }}
           >
-            {data?.numberOfRatings || "1023 Ratings & 185 Reviews"}
+            {data?.total_ratings || "1023 Ratings & 185 Reviews"}
           </p>
           <div
             style={{
@@ -140,24 +114,8 @@ const [data, setData] = useState({})
           <div
             style={{ marginTop: "30px", fontSize: "20px", marginLeft: "10px" }}
           >
-            <h3>Pack Size (2)</h3>
-            <div
-              style={{
-                fontSize: "15px",
-                marginLeft: "10px",
-                display: "flex",
-                gap: "20px",
-              }}
-            >
-              <div className="bottel">  
-                <p>30 teblets</p>
-                <p>{data?.price || "₹225"}</p>
-              </div>
-              <div className="bottel">
-                <p>30 teblets</p>
-                <p>₹415</p>
-              </div>
-            </div>
+            <h3>Pack Size</h3>
+            <h3>{data?.pack_size}</h3>
           </div>
 
           <div style={{ marginTop: "10px" }}>
@@ -203,37 +161,37 @@ const [data, setData] = useState({})
               </p>
             </div>
             <form>
-              <div style={{ fontSize: "20px", margin: "20px" }}>
+              <div style={{ fontSize: "20px", marginLeft: "20px",display:'flex',marginTop:"20px" }}>
                 <input
                   style={{ marginLeft: "15px", height: "20px", width: "20px" }}
                   name="pcheck"
-                  value=  {data?.price || "₹500"}
+                  value=  {data?.final_price || "₹500"}
                   type="radio"
                 />
-                &nbsp;&nbsp;
-                <label htmlFor="price">₹ {data?.price || "₹500"}</label>
+                {/* &nbsp;&nbsp; */}
+                <label htmlFor="price" style={{ marginLeft: "15px"}}>₹ {data?.final_price || "₹500"}</label>
                 <p
                   style={{
                     color: "#666666",
                     textDecoration: "line-through",
                     fontSize: "18px",
                     lineHeight: "23px",
-                    marginTop: "-28px",
-                    marginLeft: "110px",
+                    marginTop: "7px",
+                    marginLeft: "20px",
                   }}
                 >
-                  ₹ {data?.strikedPrice || "999"}
+                  ₹ {data?.MRP || "999"}
                 </p>
                 <p
                   style={{
                     fontWeight: "400",
                     color: "#42ba4f",
                     fontSize: "18px",
-                    marginTop: "-25px",
-                    marginLeft: "165px",
+                    marginTop: "5px",
+                    marginLeft: "15px",
                   }}
                 >
-                  {data?.discount || "50% "}% off
+                  {data?.discount || "50% "} off
                 </p>
               </div>
 

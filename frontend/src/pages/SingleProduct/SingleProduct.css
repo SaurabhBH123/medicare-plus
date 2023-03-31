@@ -26,12 +26,15 @@ margin: auto;
 }
 .producttop{
     width: 400px;
-    
+    /* border: 1px solid; */
+    height: 400px;
+    padding-top: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .producttop img {
     width: 300px;
     height: 300px;
-    
+    object-fit: contain;
 }
 .bottel{
     border: 1px solid black;
@@ -90,7 +93,7 @@ margin: auto;
 }
 .dates1{
     /* height: 120px; */
-    
+    padding: 20px;
     font-size: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;
@@ -106,8 +109,9 @@ margin: auto;
     /* width: 500px; */
     font-size: 15px;
     margin-top: 20px;
-    height: 120px;
+    height: auto;
     border: 1px dotted;
+    padding: 20px;
 }
 .offer p{
     margin-top: 20px;
@@ -134,6 +138,9 @@ margin: auto;
 }
 .btn1{
     margin-top: 10px;
+    background-color: #f9311f;
+    color: #edf9ee;
+    padding: 15px;
 }
 .div1{
     background-color: #edf9ee;
