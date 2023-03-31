@@ -4,17 +4,17 @@ import "./Product.css";
 // import { ImStarEmpty } from "react-icons/im";
 // import { FaCartPlus } from "react-icons/fa";
 // import { addCart } from "../../Redux/Cart/action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProductsdetails } from "../../redux/ProductDetails/action";
 import { useNavigate } from "react-router-dom";
+import { addCart } from "../../redux/Cart/action";
 
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-//   const handleAddToCart = (id) => {
-//     dispatch(addCart(id));
-//   };
+  const handleAddToCart = (product) => {
+    dispatch(addCart(product));
+  };
 
   const handleDetails = (id) => {
     dispatch(getProductsdetails(id));
@@ -86,7 +86,7 @@ export const ProductCard = ({ product }) => {
                 ₹{product.MRP}
               </span>
             </div>
-            <div style={{ color: "#1AAB2A" }}>{product.discount}% OFF</div>
+            <div style={{ color: "#1AAB2A" }}>{product.discount}</div>
           </Flex>
           <Flex
             justifyContent={"space-between"}
@@ -101,7 +101,7 @@ export const ProductCard = ({ product }) => {
               gap={1}
               alignItems="center"
               className="add_btn"
-            //   onClick={() => handleAddToCart(product._id)}
+              onClick={() => handleAddToCart(product)}
             >
               {/* <FaCartPlus /> */}
               ADD

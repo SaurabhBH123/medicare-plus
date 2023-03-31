@@ -13,7 +13,7 @@ import {
   Image,
   SimpleGrid,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/Product/action";
 import "./Product.css";
@@ -21,10 +21,14 @@ import { ProductCard } from "./ProductCard";
 
 const Product = () => {
   const { data } = useSelector((state) => state.ProductReducer.products);
+  const [age,setAge] = useState('')
   const dispatch = useDispatch();
-    // console.log(compGlassesData)
-    // console.log(data)
 
+  const handelSelect = (value)=>{
+    
+  }
+  
+  // console.log(data)
     useEffect(()=>{
         dispatch(getProducts());
     },[])
@@ -40,7 +44,7 @@ const Product = () => {
           border="1px solid gray"
           pl={4}
           backgroundColor="white"
-          className="sidebar"
+          // className="sidebar"
         >
           <Heading size="md" textAlign="left" mt={2}>
             Filters
@@ -82,17 +86,17 @@ const Product = () => {
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox>Child</Checkbox>
+              <Checkbox value='Child' onChange={(e)=>setAge(e.target.value)}>Child</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox>Adult</Checkbox>
+              <Checkbox value='adult' onChange={(e)=>setAge(e.target.value)}>Adult</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox>Elderly</Checkbox>
+              <Checkbox value='elderly' onChange={(e)=>setAge(e.target.value)}>Elderly</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
@@ -131,14 +135,14 @@ const Product = () => {
               </h1>
               <div>
                 <Flex gap={2}>
-                  <h2 style={{ fontWeight: "700" }}>Sort By</h2>
+                  <h3>Sort By</h3>
                   <select
-                    // onChange={(e) => handelSelect(e.target.value)}
+                    onChange={(e) => handelSelect(e.target.value)}
                     style={{ border: "1px solid grey", fontWeight: "600" }}
                   >
                     <option value="rel">Relevance</option>
-                    <option value="plth">Price: Low To High</option>
-                    <option value="phtl">Price: High To Low</option>
+                    <option value="asc">Price: Low To High</option>
+                    <option value="dec">Price: High To Low</option>
                     <option value="rlth">Rating: Low To High</option>
                     <option value="rhtl">Rating: High To Low</option>
                   </select>
