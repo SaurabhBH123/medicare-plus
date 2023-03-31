@@ -1,35 +1,39 @@
+import { Box, Text, Image, VStack, Flex } from "@chakra-ui/react";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import { Box, Text, Image, Flex } from "@chakra-ui/react";
-
-
-
-
-const TopSellers = (elem) => {
+const TopSellers = ({ elem }) => {
   return (
     <>
-      <Box style={{ cursor: "pointer" }}>
-        <Box
-          ml="4"
-          bg="#19AB2A"
-          color="white"
-          w="max-content"
-          py="0.5"
-          px="2"
-          borderRadius="4px"
-        >
-          SALE
-        </Box>
+      <VStack
+        style={{ cursor: "pointer" }}
+        position={"relative"}
+        border={"0px solid red"}
+        padding={3}
+        spacing={0}
+        justifyContent={"center"}
+        alignItems={"flex-start"}
+        _hover={{ boxShadow: "xl", borderRadius: "xl" }}
+      >
+        {elem.final_price > 1700 ? (
+          <Box
+            position={"absolute"}
+            top={1}
+            left={1}
+            bg="#19AB2A"
+            color="white"
+            w="max-content"
+            borderRadius="4px"
+            fontSize={"12px"}
+            padding={[0, 1, 1]}
+          >
+            SALE
+          </Box>
+        ) : null}
         <Image
-          h="165px"
-          mt="0px"
-          w="70px"
+          h={["90px", "120px", "150px"]}
           style={{ display: "flex", margin: "2px auto" }}
-          src={elem.img}
+          src={elem.image_url}
         />
-        <Flex ml="2">
+        {/* <Flex ml="2">
           <Box mr="2">
             <img
               src="https://img.1mg.com/images/watch_icon.svg"
@@ -40,26 +44,36 @@ const TopSellers = (elem) => {
           <Text fontSize="md" color="#19AB2A" mr="1">
             2 days 5 hrs
           </Text>
-        </Flex>
-        <Text textAlign="left" py="1" px="2">
-          {elem.name}
+        </Flex> */}
+        <Text
+          textAlign="left"
+          py="1"
+          noOfLines={[1, 1, 2]}
+          fontSize={"14px"}
+          fontWeight={"semibold"}
+        >
+          {elem.product_title}
         </Text>
         <Text ml="2" fontSize="xs">
-          {elem.desc}
+          {elem.pack_size}
         </Text>
-        <Flex ml="2">
-          <Text mr="1">{elem.striked.s1}</Text>
-          <Text as="s" mr="1">
-            {elem.striked.s2}
-          </Text>
-          <Text color="#19AB2A" mr="1">
-            {elem.striked.s3}
-          </Text>
-        </Flex>
+        <VStack ml={[0, 1, 2]}>
+          <Flex>
+            <Flex>
+              <Text fontSize={"14px"}>MRP ₹ </Text>
+              <Text fontSize={"14px"} ml="1" textDecoration={"line-through"}>
+                {elem.MRP}
+              </Text>
+            </Flex>
+            <Text ml={[0, 1, 2]} color={"green"}>
+              {elem.discount}
+            </Text>
+          </Flex>
+        </VStack>
         <Text ml="2" as="b">
-          {elem.price}
+          ₹ {elem.final_price}
         </Text>
-      </Box>
+      </VStack>
     </>
   );
 };
