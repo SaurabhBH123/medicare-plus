@@ -20,7 +20,6 @@ import ManualCarouselHomeCard from "../../Components/Carousels/ManualCarouselHom
 import { popularComboDealsURL, bpMonitorURL } from "../../utils/url.js";
 import { ayurvedaSectionData } from "../../utils/ayurvedaBrands.data.js";
 import { Loader1 } from "../../Components/Loader/Loader.jsx";
-import { LoginDetails } from "./LoginDetails.jsx";
 const Home = () => {
   const [comboData, setComboData] = useState([]);
   const [monintorData, setMonitorData] = useState([]);
@@ -72,7 +71,6 @@ const Home = () => {
   }, []);
   return (
     <>
-    <LoginDetails/>
       <Box pt={"5px"} w={"95%"} m={"auto"}>
         {/* auto slider */}
         <Grid
