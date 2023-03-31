@@ -45,6 +45,19 @@ export const getSingleProductData = (id) => (dispatch) => {
   axios
     .get(`http://localhost:4300/productPage/${id}`)
     .then((res) => {
+      console.log("editapi", res.data);
+      dispatch(getSuccessSingleProduct(res.data));
+    })
+    .catch((e) => {
+      dispatch(getFailureProduct());
+    });
+};
+export const getSingleEditProductData = (id, payload) => (dispatch) => {
+  dispatch(getRequestProduct());
+  axios
+    .patch(`http://localhost:4300/productPage/update/${id}`, payload)
+    .then((res) => {
+      console.log(res.data);
       dispatch(getSuccessSingleProduct(res.data));
     })
     .catch((e) => {
