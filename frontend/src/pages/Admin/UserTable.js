@@ -1,23 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteProductData,
-  getProductData,
-} from "../../redux/AdminProductReducer/action";
+import { getUsersData } from "../../redux/UsersReducer/action";
 function UserTable() {
   const data = useSelector((store) => {
-    return store?.adminProductReducer?.products;
+    return store?.usersReducer?.users;
   });
-  // console.log("Data", data);
+  console.log("Data", data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProductData);
+    dispatch(getUsersData);
   }, [data]);
-
-  const removeProduct = (id) => {
-    dispatch(deleteProductData(id));
-  };
 
   return (
     <div className="table-container">
@@ -373,57 +366,29 @@ function UserTable() {
             <table class="table table-centered table-nowrap mb-0 rounded">
               <thead class="thead-light">
                 <tr>
-                  <th class="border-0 rounded-start">Image</th>
-                  <th class="border-0">Name</th>
+                  <th class="border-0 rounded-start">Name</th>
                   <th class="border-0">Email</th>
-                  <th class="border-0">Mobile</th>
-                  <th class="border-0">Gender</th>
-                  <th class="border-0 rounded-end">Edit</th>
+                  <th class="border-0 rounded-end">Mobile</th>
                 </tr>
               </thead>
-              {/* <tbody>
+              <tbody>
                 {data.length > 0 &&
                   data.map((item) => {
                     return (
                       <tr key={item._id}>
                         <td>
-                          <img
-                            src={item.image_url}
-                            alt={item.product_title}
-                            style={{ height: "50px", width: "50px" }}
-                          ></img>
+                          <b className="small">{item.name}</b>
                         </td>
                         <td>
-                          <p className="small">{item.pack_size}</p>
-                        </td>
-                        <td style={{ width: "20% !important;" }}>
-                          <p className="small">{item.product_title}</p>
+                          <p className="small">{item.email}</p>
                         </td>
                         <td>
-                          <p className="small">{item.category}</p>
-                        </td>
-                        <td>
-                          <b style={{ color: "green" }}>
-                            {" "}
-                            ₹ {item.final_price}
-                          </b>
-                        </td>
-                        <td>
-                          <b>{item.MRP}</b>
-                        </td>
-                        <td>
-                          <span className="me-3">Edit</span>
-                          <span
-                            style={{ cursor: "pointer", color: "red" }}
-                            onClick={() => removeProduct(item._id)}
-                          >
-                            Delete
-                          </span>
+                          <p className="small">{item.mobile_no}</p>
                         </td>
                       </tr>
                     );
                   })}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         </div>

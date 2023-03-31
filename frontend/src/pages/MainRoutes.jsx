@@ -16,7 +16,7 @@ const MainRoute = () => {
         <Route path="/admin" element={<DashboardMain />} />
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/add-product" element={<AdminAddProduct />}></Route>
-        <Route path="/edit-product" element={<AdminEditProduct />}></Route>
+        <Route path="/edit-product/:id" element={<AdminEditProduct />}></Route>
         <Route path="/user-list" element={<UserList />} />
         <Route path="/products" element={<Product />} />
         <Route path="/products/:id" element={<SingleProduct />} />
