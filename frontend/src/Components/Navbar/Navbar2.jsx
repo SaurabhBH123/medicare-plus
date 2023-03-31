@@ -22,16 +22,18 @@ export default function Navbar2() {
     <Box
       fontFamily={"Clear Sans"}
       shadow={"sm"}
-      display={{ base: "none", md: "block" }}
+      
+      display={['none','none','none','block','block']}
       border="0px solid black"
-      h={"30px"}
+      h={"auto"}
     >
       <Stack
         direction={"row"}
-        spacing={4}
+        spacing={[0,0,1,1,3]}
         justifyContent="space-evenly"
         border="0px solid black"
         h={"100%"}
+        display={['none','none','none','flex','flex']}
       >
         {CATEGORY_ITEMS.map((navItem) => (
           <Box key={navItem.label} border="0px solid red" h={"100%"}>
@@ -39,7 +41,7 @@ export default function Navbar2() {
               <PopoverTrigger>
                 <NavLink to={navItem.href}>
                   <Text
-                    p={2}
+                    p={[0,0,0,1,1]}
                     border="0px solid black"
                     h={"100%"}
                     href={navItem.href ?? "#"}
