@@ -1,7 +1,10 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { addProduct } from "../../redux/AdminProductReducer/action";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getSingleEditProductData,
+  getSingleProductData,
+} from "../../redux/AdminProductReducer/action";
 let initialState = {
   image_url: "",
   pack_size: "",
@@ -11,33 +14,54 @@ let initialState = {
   avg_rating: "",
   total_ratings: "",
   discount: "",
-  product_title: "test",
+  product_title: "",
 };
 
 const AddProduct = () => {
+  const editId = useParams();
+  console.log("editId", editId);
   const [product, setProduct] = useState(initialState);
+  const EditData = useSelector(
+    (store) => store.adminProductReducer.singleProduct
+  );
+  console.log("data", EditData);
+  const {
+    image_url,
+    pack_size,
+    final_price,
+    MRP,
+    category,
+    avg_rating,
+    total_ratings,
+    discount,
+    product_title,
+  } = EditData[0];
+
+  console.log("Editproduct", product);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(product);
-    setProduct((prev) => {
-      return {
-        ...prev,
-        [name]:
-          name === "final_price" || name === "MRP" || name === "avg_rating"
-            ? +value
-            : value,
-      };
+    setProduct({
+      ...product,
+      [name]:
+        name === "final_price" || name === "MRP" || name === "avg_rating"
+          ? +value
+          : value,
     });
   };
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(product));
-    console.log(initialState);
+    dispatch(getSingleEditProductData(editId, product));
     setProduct(initialState);
     navigate("/product-list");
   };
+  useEffect(() => {
+    if (editId) {
+      getSingleProductData(editId);
+    }
+  }, []);
   return (
     <>
       <div class="row mt-3">
@@ -59,6 +83,7 @@ const AddProduct = () => {
                       type="text"
                       name="product_title"
                       placeholder="product_title"
+                      value={product_title}
                       onChange={(e) => handleChange(e)}
                       required
                     />

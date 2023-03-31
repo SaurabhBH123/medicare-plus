@@ -7,6 +7,7 @@ import {
 //   import { reducer as appReducer } from "./App/app.reducer";
 //   import { reducer as authReducer } from "./Auth/auth.reducer";
 import { reducer as adminProductReducer } from "./AdminProductReducer/reducer";
+import { reducer as usersReducer } from "./UsersReducer/reducer";
 import { reducer as ProductReducer } from "./Product/reducer";
 // import { reducer as CartReducer } from "./Cart/reducer";
 import { reducer as SingleProductReducer } from "./ProductDetails/reducer";
@@ -15,8 +16,9 @@ import thunk from "redux-thunk";
 
 const root_reducer = combineReducers({
   adminProductReducer,
+  usersReducer,
   ProductReducer,
-//   CartReducer,
+  //   CartReducer,
   SingleProductReducer,
   AuthReducer
 });

@@ -8,12 +8,11 @@ import {
 } from "../../redux/AdminProductReducer/action";
 function Tables() {
   const [deleteId, setDeleteId] = useState("");
-  // const [showModal, setShowModal] = useState(false);
   const data = useSelector((store) => {
     return store?.adminProductReducer?.products;
   });
   // console.log("Data", data);
-  console.log("deleteId", deleteId);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -424,7 +423,7 @@ function Tables() {
                           <b>{item.MRP}</b>
                         </td>
                         <td>
-                          <Link to={"/edit-product"}>
+                          <Link to={`/edit-product/${item._id}`}>
                             <span
                               className="me-3"
                               onClick={() => editProduct(item._id)}

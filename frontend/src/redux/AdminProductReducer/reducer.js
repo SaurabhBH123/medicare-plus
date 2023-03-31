@@ -10,6 +10,7 @@ const inti = {
   isLoading: false,
   isError: false,
   products: [],
+  singleProduct: [],
 };
 
 export const reducer = (state = inti, { type, payload }) => {
@@ -19,7 +20,7 @@ export const reducer = (state = inti, { type, payload }) => {
     case ADMIN_GET_DATA_SUCCESS:
       return { ...state, isLoading: false, products: payload };
     case ADMIN_GET_SINGLE_DATA_SUCCESS:
-      return { ...state, isLoading: false, products: payload };
+      return { ...state, isLoading: false, singleProduct: payload };
     case ADMIN_POST_PRODUCT_SUCCESS:
       return { ...state, isLoading: false };
     case ADMIN_GET_DATA_FAILURE:
