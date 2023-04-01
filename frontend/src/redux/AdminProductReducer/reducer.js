@@ -4,6 +4,7 @@ import {
   ADMIN_GET_DATA_SUCCESS,
   ADMIN_GET_SINGLE_DATA_SUCCESS,
   ADMIN_POST_PRODUCT_SUCCESS,
+  PATCH_PRODUCT_SUCCESS,
 } from "./actionType";
 
 const inti = {
@@ -25,6 +26,8 @@ export const reducer = (state = inti, { type, payload }) => {
       return { ...state, isLoading: false };
     case ADMIN_GET_DATA_FAILURE:
       return { ...state, isLoading: false, isError: true };
+    case PATCH_PRODUCT_SUCCESS:
+      return { ...state, isLoading: false };
     default:
       return state;
   }

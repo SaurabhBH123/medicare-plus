@@ -5,63 +5,53 @@ import {
   getSingleEditProductData,
   getSingleProductData,
 } from "../../redux/AdminProductReducer/action";
-let initialState = {
-  image_url: "",
-  pack_size: "",
-  final_price: 0,
-  MRP: "",
-  category: "",
-  avg_rating: "",
-  total_ratings: "",
-  discount: "",
-  product_title: "",
-};
 
 const AddProduct = () => {
-  const editId = useParams();
-  console.log("editId", editId);
-  const [product, setProduct] = useState(initialState);
-  const EditData = useSelector(
-    (store) => store.adminProductReducer.singleProduct
-  );
-  console.log("data", EditData);
-  const {
-    image_url,
-    pack_size,
-    final_price,
-    MRP,
-    category,
-    avg_rating,
-    total_ratings,
-    discount,
-    product_title,
-  } = EditData[0];
+  const { id } = useParams();
+  const EditData = useSelector((store) => store.adminProductReducer.products);
+  const [editTitle, setEditTitle] = useState("");
+  const [editImage_url, setEditImage_url] = useState("");
+  const [editPack_size, setEditPack_size] = useState("");
+  const [editFinal_price, setEditFinal_price] = useState("");
+  const [editMRP, setEditMRP] = useState("");
+  const [editCategory, setEditCategory] = useState("");
+  const [editAvg_rating, setEditAvg_rating] = useState("");
+  const [editTotal_ratings, setEditTotal_ratings] = useState("");
+  const [editDiscount, setEditDiscount] = useState("");
+  useEffect(() => {
+    const productData = EditData.find((el) => el._id === id);
+    (productData && setEditTitle(productData.product_title)) ||
+      setEditImage_url(productData.image_url) ||
+      setEditPack_size(productData.pack_size) ||
+      setEditFinal_price(productData.final_price) ||
+      setEditMRP(productData.MRP) ||
+      setEditCategory(productData.category) ||
+      setEditAvg_rating(productData.avg_rating) ||
+      setEditTotal_ratings(productData.total_ratings) ||
+      setEditDiscount(productData.discount);
+  }, []);
 
-  console.log("Editproduct", product);
-
+  console.log("editproduct", editTitle);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({
-      ...product,
-      [name]:
-        name === "final_price" || name === "MRP" || name === "avg_rating"
-          ? +value
-          : value,
-    });
-  };
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    dispatch(getSingleEditProductData(editId, product));
-    setProduct(initialState);
+    const newData = {
+      product_title: editTitle,
+      image_url: editImage_url,
+      pack_size: editPack_size,
+      final_price: editFinal_price,
+      MRP: editMRP,
+      category: editCategory,
+      avg_rating: editAvg_rating,
+      total_ratings: editTotal_ratings,
+      discount: editDiscount,
+    };
+    console.log("newData", newData);
+    dispatch(getSingleEditProductData(id, newData));
     navigate("/product-list");
   };
-  useEffect(() => {
-    if (editId) {
-      getSingleProductData(editId);
-    }
-  }, []);
+
   return (
     <>
       <div class="row mt-3">
@@ -83,8 +73,8 @@ const AddProduct = () => {
                       type="text"
                       name="product_title"
                       placeholder="product_title"
-                      value={product_title}
-                      onChange={(e) => handleChange(e)}
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
                       required
                     />
                   </div>
@@ -98,7 +88,8 @@ const AddProduct = () => {
                       type="text"
                       name="pack_size"
                       placeholder="pack_size"
-                      onChange={(e) => handleChange(e)}
+                      value={editPack_size}
+                      onChange={(e) => setEditPack_size(e.target.value)}
                       required
                     />
                   </div>
@@ -114,7 +105,8 @@ const AddProduct = () => {
                       type="text"
                       name="category"
                       placeholder="product_Category"
-                      onChange={(e) => handleChange(e)}
+                      value={editCategory}
+                      onChange={(e) => setEditCategory(e.target.value)}
                       required
                     >
                       <option value="adult">Adult</option>
@@ -133,7 +125,8 @@ const AddProduct = () => {
                       type="text"
                       name="image_url"
                       placeholder="Product Image URL"
-                      onChange={(e) => handleChange(e)}
+                      value={editImage_url}
+                      onChange={(e) => setEditImage_url(e.target.value)}
                       required
                     />
                   </div>
@@ -149,7 +142,8 @@ const AddProduct = () => {
                       type="number"
                       name="final_price"
                       placeholder="final_price"
-                      onChange={(e) => handleChange(e)}
+                      value={editFinal_price}
+                      onChange={(e) => setEditFinal_price(e.target.value)}
                       required
                     />
                   </div>
@@ -163,7 +157,8 @@ const AddProduct = () => {
                       type="text"
                       name="MRP"
                       placeholder="product MRP"
-                      onChange={(e) => handleChange(e)}
+                      value={editMRP}
+                      onChange={(e) => setEditMRP(e.target.value)}
                       required
                     />
                   </div>
@@ -180,7 +175,8 @@ const AddProduct = () => {
                       type="text"
                       name="discount"
                       placeholder="Discount"
-                      onChange={(e) => handleChange(e)}
+                      value={editDiscount}
+                      onChange={(e) => setEditDiscount(e.target.value)}
                       required
                     />
                   </div>
@@ -195,7 +191,8 @@ const AddProduct = () => {
                       type="text"
                       name="avg_rating"
                       placeholder="avg_rating"
-                      onChange={(e) => handleChange(e)}
+                      value={editAvg_rating}
+                      onChange={(e) => setEditAvg_rating(e.target.value)}
                       required
                     />
                   </div>
@@ -211,7 +208,8 @@ const AddProduct = () => {
                       type="text"
                       name="total_ratings"
                       placeholder="total_ratings"
-                      onChange={(e) => handleChange(e)}
+                      value={editTotal_ratings}
+                      onChange={(e) => setEditTotal_ratings(e.target.value)}
                       required
                     />
                   </div>
