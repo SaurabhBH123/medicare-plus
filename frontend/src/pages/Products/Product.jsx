@@ -12,26 +12,44 @@ import {
   BreadcrumbLink,
   Image,
   SimpleGrid,
+  Button,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/Product/action";
 import "./Product.css";
 import { ProductCard } from "./ProductCard";
+import Pagination from "./Pagination";
 
 const Product = () => {
   const { data } = useSelector((state) => state.ProductReducer.products);
   const [age,setAge] = useState('')
+  const [range,setRange] = useState('')
   const dispatch = useDispatch();
+  const [page,setPage] = useState(1)
 
-  const handelSelect = (value)=>{
-    
+  const handleSort = (e)=>{
+    setRange(e.target.value)
+    console.log(range)
+
+    // dispatch(getProducts(e.target.value));
   }
-  
+  const handleSelect = (e) =>{
+    setAge(e.target.value)
+    // dispatch(getProducts(e.target.value))
+  }
   // console.log(data)
     useEffect(()=>{
-        dispatch(getProducts());
-    },[])
+      let productParams={
+        params:{
+          sort:range,
+          category:age||'Child',
+          page:page||1,
+          limit:16
+        }
+      }
+        dispatch(getProducts(productParams));
+    },[range,age,page])
   return (
     <>
       <div className="main_container">
@@ -81,22 +99,22 @@ const Product = () => {
           </Heading>
           <Box mt={4} mb={4}>
             <Stack direction="row">
-              <Checkbox>All</Checkbox>
+              <Checkbox value='' onChange={handleSelect}>All</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox value='Child' onChange={(e)=>setAge(e.target.value)}>Child</Checkbox>
+              <Checkbox value='Child' onChange={handleSelect}>Child</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox value='adult' onChange={(e)=>setAge(e.target.value)}>Adult</Checkbox>
+              <Checkbox value='adult' onChange={handleSelect}>Adult</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
             <Stack direction="row">
-              <Checkbox value='elderly' onChange={(e)=>setAge(e.target.value)}>Elderly</Checkbox>
+              <Checkbox value='elderly' onChange={handleSelect}>Elderly</Checkbox>
               <Spacer></Spacer>
               <Text pr={3}>52</Text>
             </Stack>
@@ -137,12 +155,12 @@ const Product = () => {
                 <Flex gap={2}>
                   <h3>Sort By</h3>
                   <select
-                    onChange={(e) => handelSelect(e.target.value)}
+                    onChange={handleSort}
                     style={{ border: "1px solid grey", fontWeight: "600" }}
                   >
-                    <option value="rel">Relevance</option>
+                    <option value="">Relevance</option>
                     <option value="asc">Price: Low To High</option>
-                    <option value="dec">Price: High To Low</option>
+                    <option value="desc">Price: High To Low</option>
                     <option value="rlth">Rating: Low To High</option>
                     <option value="rhtl">Rating: High To Low</option>
                   </select>
@@ -155,6 +173,12 @@ const Product = () => {
               return <ProductCard key={item._id} product={item} />;
             })}
           </SimpleGrid>
+          {/* <div style={{display:'flex',marginTop:'20px',gap:'10px',justifyContent:'center',alignItems:'center'}}>
+          <Button disabled={page===1} onClick={()=>setPage(prev=>prev-1)}>PREV</Button>
+          <Button>{page}</Button>
+          <Button onClick={()=>setPage(prev=>prev+1)}>NEXT</Button>
+        </div> */}
+        <Pagination current={page} onChange={(page)=>setPage(page)}/>
         </div>
       </div>
     </>
