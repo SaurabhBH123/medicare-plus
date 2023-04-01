@@ -44,13 +44,12 @@ export const addAddress = (payload) => (dispatch) => {
 export const addCart = (product) => (dispatch) => {
   dispatch({ type: types.ADD_CART_REQUEST });
   return axios
-    .post(`http://localhost:4300/cart/addone`, {
-      product,
-    })
+    .post(`http://localhost:4300/cart/addmany`, [
+      {product}])
     .then((res) => {
-      return dispatch({ type: types.ADD_CART_SUCCESS, payload: res.res });
+      dispatch({ type: types.ADD_CART_SUCCESS, payload: res.res });
     })
     .catch((err) => {
-      return dispatch({ type: types.ADD_CART_FAILURE, payload: err });
+      dispatch({ type: types.ADD_CART_FAILURE, payload: err });
     });
 };

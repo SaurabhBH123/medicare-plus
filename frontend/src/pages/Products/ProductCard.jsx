@@ -13,6 +13,7 @@ export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleAddToCart = (product) => {
+    // console.log(product)
     dispatch(addCart(product));
   };
 
