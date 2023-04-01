@@ -48,9 +48,9 @@ productPageRouter.get("/", async (req,res) => {
    let sorting = {};
 
    if(sort === "asc"){
-       sorting =  {MRP: 1};
+       sorting =  {final_price: 1};
    }else if(sort === "desc"){
-       sorting =  {MRP: -1};
+       sorting =  {final_price: -1};
    }
 
    
@@ -64,6 +64,25 @@ productPageRouter.get("/", async (req,res) => {
       res.status(400).send({"msg":"Some error"});
    }   
 });
+
+productPageRouter.get("/search",async (req,res) => {
+    const query = req.query.search;
+   try {
+
+
+    let xyz =  await  ProductPageModel.createIndexes({product_title:1})
+   //   const data = await  ProductPageModel.find({$text:{ $search: query }});
+     
+   //   await ProductPageModel.find({ field_name: /product_title/ })
+     const data = await ProductPageModel.find({ $product_title: { $search: "Vit" } })
+
+     res.status(200).send(data);
+      
+   } catch (error) {
+      console.log(error);
+      res.status(400).send({"msg":"Some error"});
+   }
+})
 
 productPageRouter.get("/:id", async (req,res) => {
 
