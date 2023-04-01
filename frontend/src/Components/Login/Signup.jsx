@@ -11,18 +11,22 @@ import {
   Image,
   Flex,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const InitState = {
   name: "",
   email: "",
   password: "",
+  profile_url: "",
 };
 
-const Signup = ({ onClose, SetIsLogin }) => {
+const Signup = ({ onClose, setLOS }) => {
   const [values, setValues] = useState(InitState);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,45 +35,46 @@ const Signup = ({ onClose, SetIsLogin }) => {
 
   const handleclick = async (e) => {
     e.preventDefault();
-    let res1 = await fetch("https://");
-    let res2 = await res1.json();
-    let flag = false;
-    res2.map((elem) =>
-      elem.email === values.email && elem.password === values.password
-        ? (flag = true)
-        : (flag = false)
-    );
-    if (flag) {
+    console.log(values);
+    try {
+      const user = await axios.post(
+        `http://localhost:4300/auth/register`,
+        values
+      );
+      // console.log(user.status);
       toast({
-        title: "User already exists !",
-        description: "Try another user details.",
-        status: "error",
-        duration: 4000,
-        isClosable: true,
-        position: "top",
-      });
-    } else {
-      fetch("https://json-server-1mg.herokuapp.com/users", {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      toast({
-        title: "User created",
-        description: "Place your first Order.",
+        title: `Welcome ${values.name},`,
         status: "success",
-        duration: 4000,
         isClosable: true,
         position: "top",
       });
+      setValues(InitState);
+      navigate("/");
+    } catch (error) {
+      // console.log(error.response.data);
+      const loggedUser =
+        error?.response?.data === "User already exist, please login";
+      if (loggedUser) {
+        setLOS("login");
+      }
+
+      toast({
+        title: `${
+          error?.response?.data === "User already exist, please login"
+            ? "User already exist, please login"
+            : "some error"
+        }`,
+        status: "error",
+        isClosable: true,
+        position: "top",
+      });
+      setValues(InitState);
     }
   };
 
   return (
     <>
-      <VStack bg={"white"} w={"lg"}>
+      <VStack bg={"white"} w={["sm", "sm", "sm", "md", "md", "md"]}>
         <Box className="crossBox" w="100%">
           <Flex>
             <Spacer />
@@ -127,7 +132,19 @@ const Signup = ({ onClose, SetIsLogin }) => {
                 type="password"
                 value={values.password}
                 onChange={handleChange}
+                required
                 maxLength="8"
+              />
+              <Input
+                size={"md"}
+                mt="30px"
+                label="profile_url"
+                name="profile_url"
+                placeholder="Profile URL"
+                type="text"
+                value={values.profile_url}
+                onChange={handleChange}
+                required
               />
               <br />
 
@@ -141,7 +158,7 @@ const Signup = ({ onClose, SetIsLogin }) => {
             <Link
               color="rgb(255, 111, 97)"
               onClick={() => {
-                SetIsLogin(true);
+                setLOS("login");
               }}
             >
               Log in

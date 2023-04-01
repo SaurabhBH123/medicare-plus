@@ -64,7 +64,6 @@ const Home = () => {
       console.log(err);
     }
   };
-  console.log(comboData, monintorData);
   useEffect(() => {
     popularComboDealsData();
     bpMonintorData();
