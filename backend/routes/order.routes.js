@@ -36,7 +36,7 @@ orderProductRouter.get("/", async (req,res) => {
     const userID = jwt.verify(token, "subodh").userID;
 
     try {
-       const data = await  OrderProductModel.find({userID});
+       const data = await  OrderProductModel.find();
        res.status(200).send(data);
     } catch (error) {
        console.log(error);
