@@ -45,7 +45,7 @@ export default function Navbar2() {
                     border="0px solid black"
                     h={"100%"}
                     href={navItem.href ?? "#"}
-                    fontSize={"sm"}
+                    fontSize={"md"}
                     color={linkColor}
                     _hover={{
                       textDecoration: "none",

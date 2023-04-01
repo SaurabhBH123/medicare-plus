@@ -7,25 +7,20 @@ import Signup from "./Signup";
 import { Modal, ModalOverlay, ModalContent, Box, Flex } from "@chakra-ui/react";
 import LoginCarousels from "../Carousels/LoginCarousel";
 import { loginCarouselData } from "../../utils/loginCarousel.data";
-const InitState = {
-  email: "",
-  password: "",
-  username: "",
-};
+
 export default function LoginCommon({
   isOpen,
   onClose,
-  details,
-  isLogin,
-  SetIsLogin,
+  lOS,
+  setLOS,
 }) {
-  const [values, setValues] = useState(InitState);
-  const [isUserAuthenticated, SetIsUserAuthenticated] = useState(false);
+
+  
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent ml={"-50%"}>
+      <ModalContent ml={['0%','0%','-15%','-40%','-35%']}>
         <Flex
           justifyContent={"center"}
           alignItems={"center"}
@@ -33,19 +28,19 @@ export default function LoginCommon({
           border={"3px solid white"}
           gap={0}
         >
-          <Box border={"0px solid red"}>
+          <Box border={"0px solid red"} display={['none','none','none','inline-block','inline-block']}>
             <LoginCarousels allData={loginCarouselData} />
           </Box>
-
-          {!isUserAuthenticated && !isLogin ? (
-            <Signup onClose={onClose} SetIsLogin={SetIsLogin} />
+          {lOS==="signup"? (
+            <Signup onClose={onClose}  setLOS={setLOS}/>
           ) : (
             <Login
               onClose={onClose}
-              SetIsLogin={SetIsLogin}
-              SetIsUserAuthenticated={SetIsUserAuthenticated}
+              setLOS={setLOS}
             />
           )}
+
+          
         </Flex>
       </ModalContent>
     </Modal>

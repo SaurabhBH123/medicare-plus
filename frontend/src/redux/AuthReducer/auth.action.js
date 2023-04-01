@@ -16,12 +16,13 @@ export const handleAuthLoginError = () => {
 export const getUserToken = (payload) => async (dispatch) => {
 
     dispatch(handleAuthLoginRequest());
-    console.log(payload);
+    // console.log(payload);
     try {
       
         let res = await authLoginAPI(payload);
         if(res){
             dispatch(handleAuthLoginSuccess(res))
+            return res;
         }
     } catch (error) {
         dispatch(handleAuthLoginError())

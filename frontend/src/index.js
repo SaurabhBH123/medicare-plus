@@ -9,13 +9,19 @@ import { store } from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import AuthContextProvider from "./Context/AuthContext";
+import SearchContextProvider from "./Context/SearchContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <ChakraProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ChakraProvider>
-  </Provider>
+  <SearchContextProvider>
+    <AuthContextProvider>
+      <Provider store={store}>
+        <ChakraProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ChakraProvider>
+      </Provider>
+    </AuthContextProvider>
+  </SearchContextProvider>
 );

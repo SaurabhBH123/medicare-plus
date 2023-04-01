@@ -17,15 +17,19 @@ import {
 
 import { FaShoppingCart } from "react-icons/fa";
 import logo from "../../Images/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { NAV_ITEMS, AUTH_ITEMS } from "../../utils/navbar.data.js";
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import LoginCommon from "../Login/LoginCommon";
+import { AuthContext } from "../../Context/AuthContext";
+import Logout from "../Login/Logout";
 
 export default function Navbar1() {
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
-  const [isLogin, SetIsLogin] = useState(false);
+  const { isOpen, onToggle, onOpen, onClose, isLoggedIn } =
+    useContext(AuthContext);
+  const [lOS, setLOS] = useState("");
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -67,6 +71,7 @@ export default function Navbar1() {
               alt={"logo"}
               w={["60px", "90px", "100px"]}
               h={["30px", "30px", "30px"]}
+              onClick={() => navigate("/")}
             />
           </Box>
 
@@ -80,36 +85,47 @@ export default function Navbar1() {
           </Flex>
         </Flex>
 
-      
-          <Text
-            color={useColorModeValue("gray.900")}
-            fontSize={"sm"}
-            fontWeight={400}
-            _hover={{ cursor: "pointer", textDecoration: "underline" }}
-            borderRadius="none"
-            pr={"10px"}
-            onClick={onOpen}
-          >
-            Login | Sign up
-          </Text>
+        {isLoggedIn ? (
+          <Logout />
+        ) : (
+          <>
+            <Text
+              color={"gray.900"}
+              fontSize={"sm"}
+              fontWeight={400}
+              _hover={{ cursor: "pointer", textDecoration: "underline" }}
+              borderRadius="none"
+              pr={"10px"}
+              onClick={() => {
+                setLOS("login");
+                onOpen();
+              }}
+            >
+              Login |
+            </Text>
+            <Text
+              color={"gray.900"}
+              fontSize={"sm"}
+              fontWeight={400}
+              _hover={{ cursor: "pointer", textDecoration: "underline" }}
+              borderRadius="none"
+              onClick={() => {
+                setLOS("signup");
+                onOpen();
+              }}
+            >
+              {" "}
+              Sign up
+            </Text>
+          </>
+        )}
 
-        
         <LoginCommon
           isOpen={isOpen}
           onClose={onClose}
-          isLogin={isLogin}
-          SetIsLogin={SetIsLogin}
-          details={{
-            Title: "Login",
-            desc: "Get access to your orders, lab tests & doctor consultations",
-            inputLabel: "Email",
-            inputWarning: "Please enter a valid Email ID",
-            buttonTitle: "LOGIN",
-            one: "New on 1mg? Sign Up",
-            two: `By logging in, you agree to our
-                Terms and Conditions & Privacy Policy`,
-            three: "Need Help? Get In Touch",
-          }}
+          lOS={lOS}
+          setLOS={setLOS}
+  
         />
         <Flex
           gap={"15px"}

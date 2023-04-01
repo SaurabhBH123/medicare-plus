@@ -117,7 +117,7 @@ export default function ManualCarouselHomeCard({ allData, }) {
       
       <Slider {...settings} ref={(slider) => setSlider(slider)}  >
         {allData.map((elem) => (
-         <HomePageCard elem={elem} key={elem.id}/>
+         <HomePageCard elem={elem} key={elem._id}/>
         ))}
       </Slider>
       </Box>

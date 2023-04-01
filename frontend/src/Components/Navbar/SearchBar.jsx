@@ -9,10 +9,28 @@ import {
   Select,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { FaSearch, FaSearchLocation } from "react-icons/fa";
-
+import { SearchContext } from "../../Context/SearchContext";
+import { useNavigate } from "react-router-dom";
+const initial = '';
 function SearchBar() {
+  const {setQuery}=useContext(SearchContext);
+  const [searchtext, setSearchext] = useState(initial);
+  const navigate = useNavigate();
+
+  const handleKeyDown = (e) => {
+    setQuery(searchtext);
+    // navigate("/product-list");
+
+    setSearchext(initial)
+    if (e.key === "Enter") {
+      setQuery(searchtext)
+      // navigate("/product-list");
+      setSearchext(initial)
+    }
+  };
+ 
   return (
     <Box fontFamily={"Clear-Sans"} shadow={"sm"} bg="#fff">
       <Flex justify={"space-around"} minH={"40px"} py="10px" align={"center"}>
@@ -27,9 +45,9 @@ function SearchBar() {
             <Select bg={"#f1f4f6"} focusBorderColor="#f1f4f6">
               <option value="New Delhi">New Delhi</option>
               <option value="Mumbai">Mumbai</option>
-              <option value="Jodhpur">Bengaluru</option>
-              <option value="Jodhpur">Chennai</option>
-              <option value="Jodhpur">Hydrabad</option>
+              <option value="Bengaluru">Bengaluru</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Hydrabad">Hydrabad</option>
               <option value="Jaipur">Jaipur</option>
             </Select>
           </InputGroup>
@@ -38,11 +56,14 @@ function SearchBar() {
               placeholder="Search for Medical and Health Products"
               bg={"#f1f4f6"}
               focusBorderColor="#f1f4f6"
+              onChange={(e)=>setSearchext(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
             <InputRightElement
               children={<FaSearch color="green.500" />}
               pointerEvents={"auto"}
               cursor="pointer"
+              onClick={handleKeyDown}
             />
           </InputGroup>
         </Flex>

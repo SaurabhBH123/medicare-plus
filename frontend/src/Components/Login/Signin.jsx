@@ -3,7 +3,6 @@ import {
   Heading,
   Text,
   Button,
-  Link,
   Box,
   useToast,
   VStack,
@@ -11,9 +10,14 @@ import {
   Flex,
   Spacer,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUserToken } from "../../redux/AuthReducer/auth.action";
+import { AuthContext } from "../../Context/AuthContext";
+
 
 
 const InitState = {
@@ -21,25 +25,24 @@ const InitState = {
   password: "",
 };
 
-const Signin = ({ onClose, SetIsLogin, SetIsUserAuthenticated }) => {
-  const [values, setValues] = useState(InitState);
-  const [Nav, setNav] = useState(false);
+const Signin = ({ onClose,setLOS }) => {
   const toast = useToast();
+  const dispatch = useDispatch();
+  const [Nav, setNav] = useState(false);
+  const [values, setValues] = useState(InitState);
+  const {setIsLoggedIn,setToken}=useContext(AuthContext)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    console.log(values);
-
-    let flag = false;
-    if (flag) {
+  const checkUser=(token)=>{
+    if (token) {
+      setIsLoggedIn(true);
+      setToken(token);
       localStorage.setItem("isAuth", true);
       onClose();
-      SetIsUserAuthenticated(true);
       toast({
         title: "Logged in  successfully.",
         description: "Keep shopping.",
@@ -59,6 +62,11 @@ const Signin = ({ onClose, SetIsLogin, SetIsUserAuthenticated }) => {
         position: "top",
       });
     }
+  }
+
+  const handleClick =  (e) => {
+    e.preventDefault();
+    dispatch(getUserToken(values)).then((res)=>checkUser(res.token));    
   };
 
   if (Nav) {
@@ -67,7 +75,7 @@ const Signin = ({ onClose, SetIsLogin, SetIsUserAuthenticated }) => {
 
   return (
     
-      <VStack bg={'white'}>
+      <VStack bg={'white'} w={['sm','sm','sm','md','md','md']}>
         <Box className="crossBox" w="100%">
           <Flex>
             <Spacer />
@@ -125,12 +133,16 @@ const Signin = ({ onClose, SetIsLogin, SetIsUserAuthenticated }) => {
           <Text fontSize="14px" mt="20px" color="grey">
             New on 1mg?{" "}
             <Link
-              color="rgb(255, 111, 97)"
+              color="red"
               onClick={() => {
-                SetIsLogin(false);
+                // SetIsLogin(false);
+                setLOS('signup')
               }}
             >
+              
+
               Sign Up
+           
             </Link>
           </Text>
 
