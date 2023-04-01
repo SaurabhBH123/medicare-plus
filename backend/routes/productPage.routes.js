@@ -65,24 +65,12 @@ productPageRouter.get("/", async (req,res) => {
    }   
 });
 
-productPageRouter.get("/search",async (req,res) => {
-    const query = req.query.search;
-   try {
+productPageRouter.get('/search', async (req, res) => {
+   const searchTerm = req.query.q;
+   const results = await ProductPageModel.find({ product_title: { $regex: searchTerm, $options: 'i' } });
+   res.status(200).send(results);
+ });
 
-
-    let xyz =  await  ProductPageModel.createIndexes({product_title:1})
-   //   const data = await  ProductPageModel.find({$text:{ $search: query }});
-     
-   //   await ProductPageModel.find({ field_name: /product_title/ })
-     const data = await ProductPageModel.find({ $product_title: { $search: "Vit" } })
-
-     res.status(200).send(data);
-      
-   } catch (error) {
-      console.log(error);
-      res.status(400).send({"msg":"Some error"});
-   }
-})
 
 productPageRouter.get("/:id", async (req,res) => {
 
