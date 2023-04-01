@@ -5,6 +5,7 @@ import {
   ADMIN_POST_PRODUCT_SUCCESS,
   ADMIN_DELETE_PRODUCT_SUCCESS,
   ADMIN_GET_SINGLE_DATA_SUCCESS,
+  PATCH_PRODUCT_SUCCESS,
 } from "./actionType";
 import axios from "axios";
 export const getRequestProduct = () => {
@@ -52,18 +53,18 @@ export const getSingleProductData = (id) => (dispatch) => {
       dispatch(getFailureProduct());
     });
 };
-export const getSingleEditProductData = (id, payload) => (dispatch) => {
-  dispatch(getRequestProduct());
+export const getSingleEditProductData = (id, newData) => (dispatch) => {
+  dispatch(getRequestProduct())
   axios
-    .patch(`http://localhost:4300/productPage/update/${id}`, payload)
-    .then((res) => {
-      console.log(res.data);
-      dispatch(getSuccessSingleProduct(res.data));
+    .patch(`http://localhost:4300/productPage/update/${id}`, newData)
+    .then(() => {
+      dispatch({type:PATCH_PRODUCT_SUCCESS});
     })
-    .catch((e) => {
+    .catch((e) => { 
       dispatch(getFailureProduct());
     });
 };
+
 export const addProduct = (payload) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
