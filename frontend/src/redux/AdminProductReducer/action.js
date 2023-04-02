@@ -33,7 +33,7 @@ export const deleteProductSuccess = (payload) => {
 export const getProductData = (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .get(`http://localhost:4300/productPage`)
+    .get(`https://kind-jade-eagle-sari.cyclic.app/productPage`)
     .then((res) => {
       dispatch(getSuccessProduct(res.data));
     })
@@ -44,7 +44,7 @@ export const getProductData = (dispatch) => {
 export const getSingleProductData = (id) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .get(`http://localhost:4300/productPage/${id}`)
+    .get(`https://kind-jade-eagle-sari.cyclic.app/productPage/${id}`)
     .then((res) => {
       console.log("editapi", res.data);
       dispatch(getSuccessSingleProduct(res.data));
@@ -54,13 +54,16 @@ export const getSingleProductData = (id) => (dispatch) => {
     });
 };
 export const getSingleEditProductData = (id, newData) => (dispatch) => {
-  dispatch(getRequestProduct())
+  dispatch(getRequestProduct());
   axios
-    .patch(`http://localhost:4300/productPage/update/${id}`, newData)
+    .patch(
+      `https://kind-jade-eagle-sari.cyclic.app/productPage/update/${id}`,
+      newData
+    )
     .then(() => {
-      dispatch({type:PATCH_PRODUCT_SUCCESS});
+      dispatch({ type: PATCH_PRODUCT_SUCCESS });
     })
-    .catch((e) => { 
+    .catch((e) => {
       dispatch(getFailureProduct());
     });
 };
@@ -68,7 +71,7 @@ export const getSingleEditProductData = (id, newData) => (dispatch) => {
 export const addProduct = (payload) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .post("http://localhost:4300/productPage/addone", payload)
+    .post("https://kind-jade-eagle-sari.cyclic.app/productPage/addone", payload)
     .then(() => {
       dispatch(postProductSuccess());
     })
@@ -79,7 +82,7 @@ export const addProduct = (payload) => (dispatch) => {
 export const deleteProductData = (id) => (dispatch) => {
   dispatch(getRequestProduct());
   axios
-    .delete(`http://localhost:4300/productPage/delete/${id}`)
+    .delete(`https://kind-jade-eagle-sari.cyclic.app/productPage/delete/${id}`)
     .then((res) => {
       console.log(res.data);
     })

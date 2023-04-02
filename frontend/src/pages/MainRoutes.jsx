@@ -10,6 +10,7 @@ import Product from "./Products/Product";
 import SingleProduct from "./SingleProduct/SingleProduct";
 import { Cart } from "./Cart/Cart";
 import Checkout from "./Checkout/Checkout";
+import OrderList from "./Admin/OrderList";
 
 const MainRoute = () => {
   return (
@@ -21,6 +22,7 @@ const MainRoute = () => {
         <Route path="/add-product" element={<AdminAddProduct />}></Route>
         <Route path="/edit-product/:id" element={<AdminEditProduct />}></Route>
         <Route path="/user-list" element={<UserList />} />
+        <Route path="/order-list" element={<OrderList />} />
         <Route path="/products" element={<Product />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />

@@ -17,7 +17,7 @@ export const getFailureUser = () => {
 export const getUsersData = (dispatch) => {
   dispatch(getRequestUser());
   axios
-    .get(`http://localhost:4300/auth`)
+    .get(`https://kind-jade-eagle-sari.cyclic.app/auth`)
     .then((res) => {
       dispatch(getUserSuccess(res.data));
     })

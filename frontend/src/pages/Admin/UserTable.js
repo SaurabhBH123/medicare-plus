@@ -212,7 +212,7 @@ function UserTable() {
                         <div class="col ps-0 ms-2">
                           <div class="d-flex justify-content-between align-items-center">
                             <div>
-                              <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
+                              <h4 class="h6 mb-0 text-small">Rohit Kumar</h4>
                             </div>
                             <div class="text-end">
                               <small>2 hrs ago</small>
@@ -263,7 +263,7 @@ function UserTable() {
                     />
                     <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                       <span class="mb-0 font-small fw-bold text-gray-900">
-                        Bonnie Green
+                        Rohit Kumar
                       </span>
                     </div>
                   </div>
