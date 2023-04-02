@@ -55,19 +55,19 @@ const settings = {
 
 export default function LoginCarousels({ allData }) {
   return (
-    <Box w={'md'} m={"auto"}  border={'0px solid red'}>
+    <Box w={'md'} m={"auto"}  border={'1px solid red'} h={'300px'}>
      
 
-      <Box w={"95%"} m={"auto"} border={'0px solid red'}>
+      <Box w={"70%"} m={"auto"} border={'1px solid red'} h={'300px'}>
         <Slider {...settings}>
           {allData.map((elem) => (
-            <Box key={elem.name} border={"0px solid green"}>
+            <Box key={elem.name} border={"0px solid green"} h={'300px'}>
               <Box
                 style={{ cursor: "pointer" }}
                 _hover={{ boxShadow: "xl", rounded: "md" }}
               >
                 <Image
-                  style={{ display: "flex", margin: "1px auto" }}
+                  // style={{ display: "flex", margin: "1px auto" }}
                   src={elem.img}
                 />
                 <Text textAlign="center" py="2" px="2">

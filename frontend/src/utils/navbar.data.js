@@ -43,12 +43,12 @@ const CATEGORY_ITEMS = [
       {
         label: "All disease",
         subLabel: [],
-        href: "/products/disease",
+        href: "/products",
       },
       {
         label: "All Medicines",
         subLabel: [],
-        href: "/products/medicine",
+        href: "/products",
       },
       {
         label: "Medicines by Therapeutic Class",
@@ -68,7 +68,7 @@ const CATEGORY_ITEMS = [
           "Minerals-Supplement",
           "Vitamin B-12 & B-Complex",
         ],
-        href: "products/vitamins-suppliments ",
+        href: "/products ",
       },
       {
         label: "Nutritional Drinks",
