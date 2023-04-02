@@ -5,7 +5,6 @@ function UserTable() {
   const data = useSelector((store) => {
     return store?.usersReducer?.users;
   });
-  console.log("Data", data);
   const dispatch = useDispatch();
 
   useEffect(() => {

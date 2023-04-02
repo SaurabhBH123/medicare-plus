@@ -11,7 +11,6 @@ function Tables() {
   const data = useSelector((store) => {
     return store?.adminProductReducer?.products;
   });
-  // console.log("Data", data);
 
   const dispatch = useDispatch();
 
@@ -26,7 +25,6 @@ function Tables() {
   };
   const editProduct = (id) => {
     dispatch(getSingleProductData(id));
-    console.log("id", id);
   };
 
   return (

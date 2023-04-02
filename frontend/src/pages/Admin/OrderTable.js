@@ -4,12 +4,9 @@ import { getOrderData } from "../../redux/OrderReducer/action";
 import axios from "axios";
 function OrderTable() {
   const order = useSelector((store) => store.orderReducer.orders);
-  console.log("order", order);
   const dispatch = useDispatch();
   const [user, setUser] = useState({});
-  console.log(user);
   function getUserInfo(userId) {
-    console.log("userId", userId);
     axios
       .get(`https://kind-jade-eagle-sari.cyclic.app/auth/${userId}`)
       .then((response) => {

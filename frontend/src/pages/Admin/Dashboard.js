@@ -7,7 +7,6 @@ function Dashboard() {
   const [userCount, setUserCount] = useState(0);
   const [productCount, setProductCount] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
-  console.log("userCount", userCount);
   function getUserCount() {
     axios
       .get(`https://kind-jade-eagle-sari.cyclic.app/auth`)

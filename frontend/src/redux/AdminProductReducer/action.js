@@ -46,7 +46,6 @@ export const getSingleProductData = (id) => (dispatch) => {
   axios
     .get(`https://kind-jade-eagle-sari.cyclic.app/productPage/${id}`)
     .then((res) => {
-      console.log("editapi", res.data);
       dispatch(getSuccessSingleProduct(res.data));
     })
     .catch((e) => {

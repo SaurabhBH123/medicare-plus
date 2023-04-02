@@ -19,7 +19,6 @@ export const getOrderData = (dispatch) => {
   axios
     .get(`https://kind-jade-eagle-sari.cyclic.app/orders`)
     .then((res) => {
-      // console.log(res.data, "orders");
       dispatch(getOrderSuccess(res.data));
     })
     .catch((e) => {

@@ -11,7 +11,6 @@ const inti = {
 };
 
 export const reducer = (state = inti, { type, payload }) => {
-  // console.log(payload, "payload");
   switch (type) {
     case ADMIN_GET_ORDER_FAILURE:
       return { ...state, isLoading: true };
