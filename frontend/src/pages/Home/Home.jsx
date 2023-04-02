@@ -11,15 +11,15 @@ import {
   Text,
 } from "@chakra-ui/react";
 import axios from "axios";
-import AutomaticCarousel from "../../Components/Carousels/AutomaticCarousels.jsx";
+import AutomaticCarousel from "../../components/Carousels/AutomaticCarousels.jsx";
 import { AutoSliderImg } from "../../utils/autoslider.js";
 import { DiseaseData } from "../../utils/disease.data.js";
-import ManualCarousels from "../../Components/Carousels/ManualCarousels.jsx";
+import ManualCarousels from "../../components/Carousels/ManualCarousels.jsx";
 import { FeaturedBrandData } from "../../utils/FeaturedBrand.data.js";
-import ManualCarouselHomeCard from "../../Components/Carousels/ManualCarouselHomeCard.jsx";
+import ManualCarouselHomeCard from "../../components/Carousels/ManualCarouselHomeCard.jsx";
 import { popularComboDealsURL, bpMonitorURL } from "../../utils/url.js";
 import { ayurvedaSectionData } from "../../utils/ayurvedaBrands.data.js";
-import { Loader1 } from "../../Components/Loader/Loader.jsx";
+import { Loader1 } from "../../components/Loader/Loader.jsx";
 const Home = () => {
   const [comboData, setComboData] = useState([]);
   const [monintorData, setMonitorData] = useState([]);

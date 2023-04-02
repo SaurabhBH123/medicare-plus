@@ -1,8 +1,9 @@
 import { Heading, Stack, VStack } from "@chakra-ui/react";
 
-import Address from "../../Components/CheckoutComponents/Address";
-import PaymentOptions from "../../Components/CheckoutComponents/PaymentOptions";
-import PlaceOrderButton from "../../Components/CheckoutComponents/PlaceOrderButton";
+// import Address from "../../components/CheckoutComponents/Address";
+import Address from "../../components/CheckoutComponents/Address";
+import PaymentOptions from "../../components/CheckoutComponents/PaymentOptions";
+import PlaceOrderButton from "../../components/CheckoutComponents/PlaceOrderButton";
 import {useState} from "react"
 
 
