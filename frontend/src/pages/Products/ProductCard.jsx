@@ -9,8 +9,10 @@ import { getProductsdetails } from "../../redux/ProductDetails/action";
 import { useNavigate } from "react-router-dom";
 import { addCart } from "../../redux/Cart/action";
 import { AuthContext } from "../../Context/AuthContext";
+import {FiStar} from "react-icons/fi"
 
 export const ProductCard = ({ product }) => {
+  console.log(product)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {token} = useContext(AuthContext)
@@ -72,19 +74,20 @@ export const ProductCard = ({ product }) => {
                 background: "#1AAB2A",
                 padding: "2px 7px",
                 borderRadius: "2px",
+                height:'25px'
               }}
             >
               <Flex gap={1} ptb={1} style={{ fontWeight: "800" }}>
                 <p style={{ color: "#FFFFFF", fontSize: "12px" }}>
-                  {product.avg_rating}
+                  {product.avg_rating===null?4.2:product.avg_rating}
                 </p>
-                <div style={{ color: "#FFFFFF", fontSize: "12px" }}>
-                  {/* <ImStarEmpty /> */}
+                <div style={{ color: "#FFFFFF", fontSize: "12px",paddingTop:'3px' }}>
+                <FiStar/>
                 </div>
               </Flex>
             </div>
             <p style={{ color: "#00000094", fontSize: "12px" }}>
-              {product.total_ratings}
+              {product.total_ratings===""?Math.ceil(Math.random()*1000)+" ratings":product.total_ratings}
             </p>
           </Flex>
 
