@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./SingleProduct.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import { getProductsdetails } from "../../redux/ProductDetails/action";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { AuthContext } from "../../Context/AuthContext";
+import { addCart } from "../../redux/Cart/action";
+import { useToast } from "@chakra-ui/react";
 // import { addCart } from "../../Redux/Cart/action";
 
 const SingleProduct = () => {
 const [data, setData] = useState({})
   const dispatch = useDispatch();
-//   const navigate = useNavigate()
+  const {token} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const toast = useToast();
   // console.log(user)
   const {id} = useParams()
   // console.log(id)
@@ -38,6 +43,21 @@ const [data, setData] = useState({})
 //     // console.log(id)
 //     dispatch(addCart(id))
 //   };
+
+const handleAddToCart = () => {
+  // console.log(product,token)
+  const newProduct=[]
+  newProduct.push(data)
+  dispatch(addCart(newProduct,token));
+  toast({
+    title: 'Product Added To Cart.',
+    // description: "We've created your account for you.",
+    status: 'success',
+    duration: 4000,
+    isClosable: true,
+  })
+  navigate("/cart")
+};
 
   return (
     <div id="product">
@@ -247,7 +267,7 @@ const [data, setData] = useState({})
                 <button
                   className="btn1"
                   type="submit"
-                //   onClick={() => hendelADDToCart(id)}
+                  onClick={() => handleAddToCart()}
                 >
                   ADD TO CART
                 </button>
