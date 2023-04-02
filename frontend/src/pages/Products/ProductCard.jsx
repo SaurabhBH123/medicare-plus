@@ -1,5 +1,5 @@
-import { Flex } from "@chakra-ui/react";
-import React from "react";
+import { Flex, useToast } from "@chakra-ui/react";
+import React, { useContext } from "react";
 import "./Product.css";
 // import { ImStarEmpty } from "react-icons/im";
 // import { FaCartPlus } from "react-icons/fa";
@@ -8,13 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductsdetails } from "../../redux/ProductDetails/action";
 import { useNavigate } from "react-router-dom";
 import { addCart } from "../../redux/Cart/action";
+import { AuthContext } from "../../Context/AuthContext";
 
 export const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {token} = useContext(AuthContext)
+  const toast = useToast()
+  // console.log(token)
   const handleAddToCart = (product) => {
-    // console.log(product)
-    dispatch(addCart(product));
+    console.log(product,token)
+    const newProduct=[]
+    newProduct.push(product)
+    dispatch(addCart(newProduct,token));
+    toast({
+      title: 'Product Added To Cart.',
+      // description: "We've created your account for you.",
+      status: 'success',
+      duration: 4000,
+      isClosable: true,
+    })
+    navigate("/cart")
   };
 
   const handleDetails = (id) => {

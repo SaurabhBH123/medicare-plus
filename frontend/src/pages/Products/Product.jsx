@@ -14,12 +14,13 @@ import {
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/Product/action";
 import "./Product.css";
 import { ProductCard } from "./ProductCard";
 import Pagination from "./Pagination";
+import { SearchContext } from "../../Context/SearchContext";
 
 const Product = () => {
   const { data } = useSelector((state) => state.ProductReducer.products);
@@ -27,6 +28,8 @@ const Product = () => {
   const [range,setRange] = useState('')
   const dispatch = useDispatch();
   const [page,setPage] = useState(1)
+  const {query}=useContext(SearchContext)
+
 
   const handleSort = (e)=>{
     setRange(e.target.value)
@@ -40,16 +43,32 @@ const Product = () => {
   }
   // console.log(data)
     useEffect(()=>{
-      let productParams={
-        params:{
-          sort:range,
-          category:age||'Child',
-          page:page||1,
-          limit:16
+      if(query){
+        let url=`http://localhost:4300/productPage/search?q=${query}`;
+        let productParams={
+          params:{
+            sort:range,
+            category:age,
+            page:page||1,
+            limit:16
+          }
         }
+          dispatch(getProducts(url,productParams));
+      }else{
+        let url=`http://localhost:4300/productPage`;
+        let productParams={
+          params:{
+            sort:range,
+            category:age||'Child',
+            page:page||1,
+            limit:16
+          }
+        }
+          dispatch(getProducts(url,productParams));
       }
-        dispatch(getProducts(productParams));
-    },[range,age,page])
+      
+      
+    },[range,age,page,query])
   return (
     <>
       <div className="main_container">
@@ -170,6 +189,7 @@ const Product = () => {
           </div>
           <SimpleGrid columns={[1, 2, 3, 4]} spacing="20px">
             {data?.map((item) => {
+              // console.log(item)
               return <ProductCard key={item._id} product={item} />;
             })}
           </SimpleGrid>
@@ -337,3 +357,5 @@ const Product = () => {
 };
 
 export default Product;
+
+//const data = await ProductPageModel.find( {$regex: req.obj.q, $options: 'i'  }).skip(skip).limit(limit).sort(sorting)
