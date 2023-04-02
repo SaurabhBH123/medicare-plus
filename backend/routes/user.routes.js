@@ -1,22 +1,27 @@
 const express = require("express");
 const {UserModel} = require("../models/user.model");
-const { uniqueUser } = require("../middlewares/uniqueuser");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const userRouter = express.Router();
 
-userRouter.post("/register",uniqueUser,async(req,res) => {
+userRouter.post("/register",async(req,res) => {
     const {name,email,password,profile_url,mobile_no} = req.body;
-    try {
-        bcrypt.hash(password, 5,async (err, hash) => {
-            const user = await new UserModel({name,email,password:hash,profile_url,mobile_no});
-            user.save();
-            res.status(200).send({"msg":"user registered successfuly"});
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(400).send({"msg":"error occured"});
+
+    const user = await UserModel.find({email});
+    if(user.length>0){
+        res.status(400).send("User already exist, please login")
+    }else{
+        try {
+            bcrypt.hash(password, 5,async (err, hash) => {
+                const user = await new UserModel({name,email,password:hash,profile_url,mobile_no});
+                user.save();
+                res.status(200).send({"msg":"user registered successfuly"});
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(400).send({"msg":"error occured"});
+        }
     }
 });
 
