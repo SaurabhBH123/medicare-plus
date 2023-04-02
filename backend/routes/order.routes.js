@@ -4,7 +4,7 @@ const {OrderProductModel} = require("../models/orderModal");
 const jwt = require("jsonwebtoken");
 
 const orderProductRouter = express.Router();
-orderProductRouter.use(authenticated);
+// orderProductRouter.use(authenticated);
 
 orderProductRouter.post("/addone", async (req,res) => {
      const payload = req.body;
@@ -32,8 +32,8 @@ orderProductRouter.post("/addmany", async (req,res) => {
 });
 
 orderProductRouter.get("/", async (req,res) => {
-    const token = req.headers.authorization.split(" ")[1];
-    const userID = jwt.verify(token, "subodh").userID;
+   //  const token = req.headers.authorization.split(" ")[1];
+   //  const userID = jwt.verify(token, "subodh").userID;
 
     try {
        const data = await  OrderProductModel.find();
