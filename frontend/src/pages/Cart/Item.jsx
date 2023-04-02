@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./Cart.css";
 import { AuthContext } from "../../Context/AuthContext";
 
@@ -14,6 +14,8 @@ export const Item = ({
   discount,
 }) => {
   const {token} = useContext(AuthContext)
+  const [quantity,setQuantity] = useState(1)
+
   return (
     <div className="Item-conatiner">
       <div className="left-item-container">
@@ -29,7 +31,7 @@ export const Item = ({
         <p>MRP ₹{MRP}</p>
         <div className="quantity-div">
           <div 
-          // disabled={quantity === 1} 
+          disabled={quantity === 1} 
           onClick={() => handleChange(id, -1)}>
             <img
               src="https://www.1mg.com/images/minus-cart.svg"
@@ -38,9 +40,11 @@ export const Item = ({
             />
           </div>
           <div>
-            {/* <p>{quantity}</p> */}
+            <p style={{marginTop:'10px'}}>{quantity}</p>
           </div>
-          <div onClick={() => handleChange(id, 1)}>
+          <div
+          disabled={quantity === 10}
+          onClick={() => handleChange(id, 1)}>
             <img
               src="https://www.1mg.com/images/plus-cart.svg"
               alt="plus"

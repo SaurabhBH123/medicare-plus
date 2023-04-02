@@ -28,6 +28,7 @@ export const ProductCard = ({ product }) => {
       duration: 4000,
       isClosable: true,
     })
+    navigate("/cart")
   };
 
   const handleDetails = (id) => {

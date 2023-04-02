@@ -32,7 +32,7 @@ export const deleteCart = (id,token) =>async (dispatch) => {
     .delete(`http://localhost:4300/cart/delete/${id}`,{headers:{"Authorization": `Bearer ${token}`}})
     .then((res) => {
       console.log(res)
-      dispatch({ type: types.DELETE_CART_SUCCESS });
+      dispatch({ type: types.DELETE_CART_SUCCESS,payload:id });
     })
     .catch((err) => {
       console.log(err)

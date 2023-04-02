@@ -310,3 +310,10 @@
   width: 60%;
   padding: 1rem 0.5rem;
 }
+
+@media screen and (max-width: 720px) {
+  .Item-conatiner {
+    display: flex;
+    flex-direction: column;
+  }
+}

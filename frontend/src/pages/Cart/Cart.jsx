@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Cart.css";
 import { Item } from "./Item";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,33 +9,8 @@ import { AuthContext } from "../../Context/AuthContext";
 
 
 export const Cart = () => {
-  // const { data } = useSelector((state) => state.CartReducer.carts);
-  const data = [
-    {
-      "id": 1,
-      "category": "adult",
-      "image_url": "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/d3008f6cfdd34ceabbf8e478918c640d/alzyme-syrup-pineapple.jpg",
-      "product_title": "Alzyme + Syrup Pineapple",
-      "pack_size": "bottle of 200ml Syrup",
-      "avg_rating": "",
-      "total_ratings": "",
-      "MRP": 135,
-      "discount": 40,
-      "final_price": 81
-    },
-    {
-      "image_url": "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/612582d3c8ee43c2978b15f6679129b1/megagrow-bcaa-advance-supplement-powder-green-apple.jpg",
-      "pack_size": "test",
-      "final_price": 200,
-      "MRP": 300,
-      "category": "child",
-      "avg_rating": 3,
-      "total_ratings": "5",
-      "discount": "100",
-      "product_title": "test",
-      "id": 2
-    }
-  ]
+  const {carts} = useSelector((state) => state.CartReducer);
+  console.log(carts)
   const dispatch = useDispatch();
   const {
     isOpen,
@@ -54,16 +29,16 @@ export const Cart = () => {
   }, []);
 
   const totalPrice =
-    data?.reduce((acc, item) => acc + Number(item.MRP), 0) || 0;
+    carts?.reduce((acc, item) => acc + Number(item.MRP), 0) || 0;
 
   const discountPrice =
-    data?.reduce(
+    carts?.reduce(
       (acc, item) => acc + Number([(item.discount / 100) * item.MRP]),
       0
     ) || 0;
 
   const handleChange = (id, change) => {
-    let temp = data.filter((item) => (item._id === id ? item : null));
+    let temp = carts.filter((item) => (item._id === id ? item : null));
     let temp2 = temp[0].quantity + change;
     const payload = {
       quantity: temp2,
@@ -92,8 +67,8 @@ export const Cart = () => {
       <div className="left-container">
         {/* <p>Items NOT Requiring Prescription</p> */}
         <div>
-          {data !== undefined
-            ? data?.map((item) => {
+          {carts !== undefined
+            ? carts?.map((item) => {
                 return (
                   <Item
                     key={item._id}
