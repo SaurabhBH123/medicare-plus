@@ -11,17 +11,20 @@ import "bootstrap/dist/js/bootstrap.js";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import AuthContextProvider from "./Context/AuthContext";
 import SearchContextProvider from "./Context/SearchContext";
+import CartContextProvider from "./Context/CartContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <SearchContextProvider>
-    <AuthContextProvider>
-      <Provider store={store}>
-        <ChakraProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ChakraProvider>
-      </Provider>
-    </AuthContextProvider>
+    <CartContextProvider>
+      <AuthContextProvider>
+        <Provider store={store}>
+          <ChakraProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </ChakraProvider>
+        </Provider>
+      </AuthContextProvider>
+    </CartContextProvider>
   </SearchContextProvider>
 );
