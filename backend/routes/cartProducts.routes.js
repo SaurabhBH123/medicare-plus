@@ -21,10 +21,10 @@ cartProductRouter.post("/addone", async (req,res) => {
 
 cartProductRouter.post("/addmany", async (req,res) => {
     const payload = req.body;
-
+   
     try {
        const data = await  CartProductModel.insertMany(payload);
-       res.status(200).send({"msg":"data has been added to cart"});
+       res.status(200).send(data);
     } catch (error) {
        console.log(error);
        res.status(400).send({"msg":"Some error"});
@@ -76,7 +76,7 @@ cartProductRouter.patch("/updatemany", async (req,res) => {
 
 cartProductRouter.delete("/delete/:id", async (req,res) => {
     const id = req.params.id;
- 
+    
      try {
         await  CartProductModel.findByIdAndDelete(id);
         res.status(200).send({"msg":"data has been deleted successfully"});
