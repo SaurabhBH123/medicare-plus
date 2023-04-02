@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { deleteCart, getCarts, updateCart } from "../../redux/Cart/action";
 import { AuthContext } from "../../Context/AuthContext";
+import Navbar1 from "../../components/Navbar/Navbar1";
+import SearchBar from "../../components/Navbar/SearchBar";
+import Footer from "../../components/Footer/Footer";
 
 
 export const Cart = () => {
@@ -52,7 +55,7 @@ export const Cart = () => {
   };
 
   const handleDelete = (id,token) => {
-    dispatch(deleteCart(id,token))
+    dispatch(deleteCart(id,token)).then(()=>dispatch(getCarts(token)))
     // .then((res) => {
     //   dispatch(getCarts());
     // }
@@ -63,6 +66,9 @@ export const Cart = () => {
   };
 
   return (
+    <>
+    <Navbar1/>
+    <SearchBar/>
     <div className={"container"}>
       <div className="left-container">
         {/* <p>Items NOT Requiring Prescription</p> */}
@@ -196,5 +202,7 @@ export const Cart = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };

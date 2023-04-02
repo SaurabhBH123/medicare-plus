@@ -20,6 +20,11 @@ import ManualCarouselHomeCard from "../../components/Carousels/ManualCarouselHom
 import { popularComboDealsURL, bpMonitorURL } from "../../utils/url.js";
 import { ayurvedaSectionData } from "../../utils/ayurvedaBrands.data.js";
 import { Loader1 } from "../../components/Loader/Loader.jsx";
+import Navbar1 from "../../components/Navbar/Navbar1.jsx";
+import SearchBar from "../../components/Navbar/SearchBar.jsx";
+import Navbar2 from "../../components/Navbar/Navbar2.jsx";
+import HomeFooter from "../../components/Footer/HomeFooter.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 const Home = () => {
   const [comboData, setComboData] = useState([]);
   const [monintorData, setMonitorData] = useState([]);
@@ -70,6 +75,9 @@ const Home = () => {
   }, []);
   return (
     <>
+    <Navbar1/>
+    <SearchBar/>
+    <Navbar2/>
       <Box pt={"5px"} w={"95%"} m={"auto"}>
         {/* auto slider */}
         <Grid
@@ -174,6 +182,8 @@ const Home = () => {
           <ManualCarousels allData={ayurvedaSectionData} />
         </Box>
       </Box>
+      <HomeFooter/>
+      <Footer/>
     </>
   );
 };

@@ -21,6 +21,10 @@ import "./Product.css";
 import { ProductCard } from "./ProductCard";
 import Pagination from "./Pagination";
 import { SearchContext } from "../../Context/SearchContext";
+import HomeNavbar from "../../components/Navbar/HomeNavbar";
+import Footer from "../../components/Footer/Footer";
+import Navbar1 from "../../components/Navbar/Navbar1";
+import SearchBar from "../../components/Navbar/SearchBar";
 
 const Product = () => {
   const { data } = useSelector((state) => state.ProductReducer.products);
@@ -43,21 +47,23 @@ const Product = () => {
   }
   // console.log(data)
     useEffect(()=>{
-      if(query){
-        let url=`http://localhost:4300/productPage/search?q=${query}`;
+      // if(query){
+      //   // let url=`http://localhost:4300/productPage/search?q=${query}`;
+      //   let url=`https://kind-jade-eagle-sari.cyclic.app/productPage?search=${query}`;
+      //   let productParams={
+      //     params:{
+      //       sort:range,
+      //       category:age,
+      //       page:page||1,
+      //       limit:16
+      //     }
+      //   }
+      //     dispatch(getProducts(url,productParams));
+      // }else{
+        let url=`https://kind-jade-eagle-sari.cyclic.app/productPage`;
         let productParams={
           params:{
-            sort:range,
-            category:age,
-            page:page||1,
-            limit:16
-          }
-        }
-          dispatch(getProducts(url,productParams));
-      }else{
-        let url=`http://localhost:4300/productPage`;
-        let productParams={
-          params:{
+            search:query,
             sort:range,
             category:age||'Child',
             page:page||1,
@@ -65,12 +71,14 @@ const Product = () => {
           }
         }
           dispatch(getProducts(url,productParams));
-      }
+      // }
       
       
     },[range,age,page,query])
   return (
     <>
+    <Navbar1/>
+    <SearchBar/>
       <div className="main_container">
         {/* <div className="sidebar">
           <Sidebar />
@@ -201,6 +209,7 @@ const Product = () => {
         <Pagination current={page} onChange={(page)=>setPage(page)}/>
         </div>
       </div>
+      <Footer/>
     </>
     // <Flex p={5}>
     // <Box w="20%" h="500px" border="1px solid black" pl={4} backgroundColor='white'>

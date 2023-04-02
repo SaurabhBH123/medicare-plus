@@ -8,6 +8,9 @@ import { useEffect } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import { addCart } from "../../redux/Cart/action";
 import { useToast } from "@chakra-ui/react";
+import Navbar1 from "../../components/Navbar/Navbar1";
+import SearchBar from "../../components/Navbar/SearchBar";
+import Footer from "../../components/Footer/Footer";
 // import { addCart } from "../../Redux/Cart/action";
 
 const SingleProduct = () => {
@@ -60,6 +63,9 @@ const handleAddToCart = () => {
 };
 
   return (
+    <>
+    <Navbar1/>
+    <SearchBar/>
     <div id="product">
       <div className="productdel">
 
@@ -303,6 +309,8 @@ const handleAddToCart = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

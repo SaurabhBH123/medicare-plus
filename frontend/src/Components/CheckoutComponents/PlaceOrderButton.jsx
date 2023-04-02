@@ -46,6 +46,7 @@ export default function PlaceOrderButton({ isDisabled }) {
 				padding="25px 50px"
 				isDisabled={!isDisabled}
 				onClick={() => {
+					
 					onOpen();
 					startOrderProcessing();
 				}}

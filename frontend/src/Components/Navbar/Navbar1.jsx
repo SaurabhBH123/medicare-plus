@@ -13,6 +13,7 @@ import {
   Divider,
   Img,
   Center,
+  Circle,
 } from "@chakra-ui/react";
 
 import { FaShoppingCart } from "react-icons/fa";
@@ -134,6 +135,7 @@ export default function Navbar1() {
           lineHeight="tight"
           border={"0px solid red"}
           ml={"20px"}
+          position={'relative'}
         >
           <Text
             cursor={"pointer"}
@@ -150,6 +152,7 @@ export default function Navbar1() {
             _hover={{ cursor: "pointer" }}
             onClick={()=>navigate('/cart')}
           />
+          <Circle position={'absolute'} display={'none'} left={16} top={-1} size='40px'w={"14px"} h={"14px"} bg='tomato' color='white'><Text as={"span"} fontSize={"10px"} color={"white"}>{1}</Text></Circle> 
 
           <Text
             cursor="pointer"
