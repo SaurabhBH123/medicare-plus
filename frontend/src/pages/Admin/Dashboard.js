@@ -403,7 +403,7 @@ function Dashboard() {
                     </div>
                     <div class="d-sm-none">
                       <h2 class="h5">Customers</h2>
-                      <h3 class="fw-extrabold mb-1">345,678</h3>
+                      <h3 class="fw-extrabold mb-1">{userCount.length}</h3>
                     </div>
                   </div>
                   <div class="col-12 col-xl-7 px-xl-0">
@@ -473,7 +473,7 @@ function Dashboard() {
                     </div>
                     <div class="d-sm-none">
                       <h2 class="fw-extrabold h5">Total Products</h2>
-                      <h3 class="mb-1">$43,594</h3>
+                      <h3 class="mb-1">{productCount.length}</h3>
                     </div>
                   </div>
                   <div class="col-12 col-xl-7 px-xl-0">
@@ -543,7 +543,7 @@ function Dashboard() {
                     </div>
                     <div class="d-sm-none">
                       <h2 class="fw-extrabold h5">Total Orders</h2>
-                      <h3 class="mb-1">50.88%</h3>
+                      <h3 class="mb-1">{orderCount.length}</h3>
                     </div>
                   </div>
                   <div class="col-12 col-xl-7 px-xl-0">
