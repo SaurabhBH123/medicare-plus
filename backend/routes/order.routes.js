@@ -24,7 +24,7 @@ orderProductRouter.post("/addmany", async (req,res) => {
 
     try {
        const data = await  OrderProductModel.insertMany(payload);
-       res.status(200).send({"msg":"data has been added to cart"});
+       res.status(200).send(data);
     } catch (error) {
        console.log(error);
        res.status(400).send({"msg":"Some error"});
