@@ -65,6 +65,7 @@ export default function Navbar1() {
             to="/"
             cursor={"pointer"}
             border={"0px solid black"}
+            mx={[1,1,2,23]}
           >
             <Img
               src={logo}
@@ -78,7 +79,7 @@ export default function Navbar1() {
           <Flex
             display={{ base: "none", md: "none", lg: "flex" }}
             alignItems={"center"}
-            mx={"5px"}
+            mx={"15px"}
             border={"0px solid black"}
           >
             <DesktopNav />
@@ -147,6 +148,7 @@ export default function Navbar1() {
             h={4}
             mt={1.5}
             _hover={{ cursor: "pointer" }}
+            onClick={()=>navigate('/cart')}
           />
 
           <Text

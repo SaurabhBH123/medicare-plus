@@ -20,14 +20,10 @@ function SearchBar() {
   const navigate = useNavigate();
 
   const handleKeyDown = (e) => {
-    setQuery(searchtext);
-    // navigate("/product-list");
-
-    setSearchext(initial)
     if (e.key === "Enter") {
       setQuery(searchtext)
-      // navigate("/product-list");
-      setSearchext(initial)
+      setSearchext("")
+      navigate("/products");
     }
   };
  

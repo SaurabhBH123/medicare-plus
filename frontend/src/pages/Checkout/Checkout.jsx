@@ -10,7 +10,7 @@ import {useState} from "react"
 export default function Checkout(props) {
   const [checkAddress,setCheckAddress]=useState(false);
   const [checkPayment,setCheckPayment]=useState(false);
-  console.log(checkAddress,checkPayment)
+  // console.log(checkAddress,checkPayment)
   return (
     <VStack>
       <Stack

@@ -1,57 +1,65 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Cart.css";
 import { Item } from "./Item";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { deleteCart, getCarts, updateCart } from "../../redux/Cart/action";
-
+import { AuthContext } from "../../Context/AuthContext";
 
 export const Cart = () => {
   // const { data } = useSelector((state) => state.CartReducer.carts);
   const data = [
     {
-      "id": 1,
-      "category": "adult",
-      "image_url": "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/d3008f6cfdd34ceabbf8e478918c640d/alzyme-syrup-pineapple.jpg",
-      "product_title": "Alzyme + Syrup Pineapple",
-      "pack_size": "bottle of 200ml Syrup",
-      "avg_rating": "",
-      "total_ratings": "",
-      "MRP": 135,
-      "discount": 40,
-      "final_price": 81
+      id: 1,
+      category: "adult",
+      image_url:
+        "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/d3008f6cfdd34ceabbf8e478918c640d/alzyme-syrup-pineapple.jpg",
+      product_title: "Alzyme + Syrup Pineapple",
+      pack_size: "bottle of 200ml Syrup",
+      avg_rating: "",
+      total_ratings: "",
+      MRP: 135,
+      discount: 40,
+      final_price: 81,
     },
     {
-      "image_url": "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/612582d3c8ee43c2978b15f6679129b1/megagrow-bcaa-advance-supplement-powder-green-apple.jpg",
-      "pack_size": "test",
-      "final_price": 200,
-      "MRP": 300,
-      "category": "child",
-      "avg_rating": 3,
-      "total_ratings": "5",
-      "discount": "100",
-      "product_title": "test",
-      "id": 2
-    }
-  ]
+      image_url:
+        "https://onemg.gumlet.io/images/h_150,w_150,f_auto,q_auto,c_fit/612582d3c8ee43c2978b15f6679129b1/megagrow-bcaa-advance-supplement-powder-green-apple.jpg",
+      pack_size: "test",
+      final_price: 200,
+      MRP: 300,
+      category: "child",
+      avg_rating: 3,
+      total_ratings: "5",
+      discount: "100",
+      product_title: "test",
+      id: 2,
+    },
+  ];
   const dispatch = useDispatch();
+  const {
+    isOpen,
+    onToggle,
+    onOpen,
+    onClose,
+    isLoggedIn,
+    setIsLoggedIn,
+    token,
+    setToken,
+  } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   dispatch(getCarts());
   // }, []);
 
   const totalPrice =
-    data?.reduce(
-      (acc, item) => acc + Number(item.MRP),
-      0
-    ) || 0;
+    data?.reduce((acc, item) => acc + Number(item.MRP), 0) || 0;
 
   const discountPrice =
     data?.reduce(
-      (acc, item) =>
-        acc +
-        Number([(item.discount / 100) * item.MRP]),
+      (acc, item) => acc + Number([(item.discount / 100) * item.MRP]),
       0
     ) || 0;
 
@@ -73,6 +81,9 @@ export const Cart = () => {
     dispatch(deleteCart(id)).then((res) => {
       dispatch(getCarts());
     });
+  };
+  const handleClick = () => {
+    isLoggedIn ? navigate("/checkout") : onOpen();
   };
 
   return (
@@ -205,9 +216,7 @@ export const Cart = () => {
             <p>Your delivery location</p>
             {/* <h6>Latur</h6> */}
           </div>
-          <Link to={"/address-page"}>
-            <button>CHECKOUT</button>
-          </Link>
+          <button onClick={handleClick}>CHECKOUT</button>
         </div>
       </div>
     </div>
