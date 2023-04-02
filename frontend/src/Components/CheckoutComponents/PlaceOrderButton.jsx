@@ -9,10 +9,16 @@ import {
 	ModalFooter,
 	ModalBody,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { addOrderData } from "../../redux/OrderReducer/action";
 
 export default function PlaceOrderButton({ isDisabled }) {
 	console.log(isDisabled)
 	const navigate = useNavigate();
+	const {carts} = useSelector((state) => state.CartReducer);
+	const dispatch = useDispatch()
+	// const {token} = useContext(AuthContext)
+	// console.log(carts)
 	// const user = useSelector((state) => state.auth.user);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [orderStage, setOrderStage] = useState(0);
@@ -38,6 +44,9 @@ export default function PlaceOrderButton({ isDisabled }) {
 		}
 	};
 
+	const handleAdd = ()=>{
+		dispatch(addOrderData(carts))
+	}
 	return (
 		<>
 			<Button
@@ -46,6 +55,7 @@ export default function PlaceOrderButton({ isDisabled }) {
 				padding="25px 50px"
 				isDisabled={!isDisabled}
 				onClick={() => {
+					handleAdd()
 					onOpen();
 					startOrderProcessing();
 				}}

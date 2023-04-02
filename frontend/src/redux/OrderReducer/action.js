@@ -1,4 +1,7 @@
 import {
+  ADMIN_ADD_ORDER_FAILURE,
+  ADMIN_ADD_ORDER_REQUEST,
+  ADMIN_ADD_ORDER_SUCCESS,
   ADMIN_GET_ORDER_FAILURE,
   ADMIN_GET_ORDER_REQUEST,
   ADMIN_GET_ORDER_SUCCESS,
@@ -23,5 +26,17 @@ export const getOrderData = (dispatch) => {
     })
     .catch((e) => {
       dispatch(getFailureOrder());
+    });
+};
+
+export const addOrderData = (products) => async(dispatch) => {
+  dispatch({type:ADMIN_ADD_ORDER_REQUEST});
+  await axios
+    .post(`https://localhost:4300/orders/addmay`,products)
+    .then((res) => {
+      dispatch({type:ADMIN_ADD_ORDER_SUCCESS,payload:res.data});
+    })
+    .catch((e) => {
+      dispatch({type:ADMIN_ADD_ORDER_FAILURE});
     });
 };
