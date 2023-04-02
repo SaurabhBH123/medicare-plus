@@ -38,7 +38,7 @@ const Signup = ({ onClose, setLOS }) => {
     console.log(values);
     try {
       const user = await axios.post(
-        `http://localhost:4300/auth/register`,
+        `https://kind-jade-eagle-sari.cyclic.app/auth/register`,
         values
       );
       // console.log(user.status);

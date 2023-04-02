@@ -28,7 +28,7 @@ const [data, setData] = useState({})
 //   }
 
   const fetchSingleProduct=(id)=>{
-    axios(`http://localhost:4300/productPage?_id=${id}`)
+    axios(`https://kind-jade-eagle-sari.cyclic.app/productPage?_id=${id}`)
     // .then(res=>setData(res.data[0]))
     .then(res=>setData(res.data[0]))
      .catch(err=>console.log(err))

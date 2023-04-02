@@ -31,9 +31,11 @@ export const getOrderData = (dispatch) => {
 
 export const addOrderData = (products) => async(dispatch) => {
   dispatch({type:ADMIN_ADD_ORDER_REQUEST});
+  console.log(products)
   await axios
-    .post(`https://localhost:4300/orders/addmay`,products)
+    .post(`https://kind-jade-eagle-sari.cyclic.app/orders/addmany`,products)
     .then((res) => {
+      console.log(res)
       dispatch({type:ADMIN_ADD_ORDER_SUCCESS,payload:res.data});
     })
     .catch((e) => {

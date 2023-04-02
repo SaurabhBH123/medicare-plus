@@ -48,7 +48,7 @@ const Product = () => {
   // console.log(data)
     useEffect(()=>{
       // if(query){
-      //   // let url=`http://localhost:4300/productPage/search?q=${query}`;
+      //   // let url=`https://kind-jade-eagle-sari.cyclic.app/productPage/search?q=${query}`;
       //   let url=`https://kind-jade-eagle-sari.cyclic.app/productPage?search=${query}`;
       //   let productParams={
       //     params:{

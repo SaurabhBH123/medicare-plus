@@ -65,7 +65,7 @@ const Signin = ({ onClose, setLOS }) => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(values);
+    // console.log(values);
     if (values.email === "admin@medicare.com" && values.password === "admin") {
       navigate("/admin");
       onClose();

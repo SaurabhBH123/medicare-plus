@@ -30,7 +30,7 @@ function reducer(state, action) {
 export default function Address({ setCheckAddress }) {
   const [flag, setFlag] = useState(false);
   const [addressInfo, dispatch] = useReducer(reducer, initialAddressInfo);
-  console.log(addressInfo);
+  // console.log(addressInfo);
   function validateAddressInfo() {
     for (let i in addressInfo) {
       if (addressInfo[i] !== "") {

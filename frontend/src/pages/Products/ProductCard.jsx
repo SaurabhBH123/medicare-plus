@@ -12,7 +12,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import {FiStar} from "react-icons/fi"
 
 export const ProductCard = ({ product }) => {
-  console.log(product)
+  // console.log(product)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {token} = useContext(AuthContext)
