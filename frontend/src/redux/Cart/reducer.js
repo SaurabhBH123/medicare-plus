@@ -44,6 +44,18 @@ export const reducer = (state = initialState, action) => {
       case types.ADD_CART_FAILURE:
         return { ...state, isLoading: false, isError: true };
   
+        // case types.DELETE_CART_SUCCESS:
+        //   // const res = carts.filter((el) => (
+        //   //   el.id !== payload
+        //   // ))
+        //   return {
+        //     ...state,
+        //     isLoading: false,
+        //     isError: false,
+        //     carts: carts.filter((el) => (
+        //       el.id !== payload
+        //     ))
+        //   }
     default:
       return state;
   }

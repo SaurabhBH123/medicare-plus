@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import "./Cart.css";
+import { AuthContext } from "../../Context/AuthContext";
 
 export const Item = ({
+  _id,
   product_title,
   pack_size,
   final_price,
@@ -10,14 +13,15 @@ export const Item = ({
   handleDelete,
   discount,
 }) => {
+  const {token} = useContext(AuthContext)
   return (
     <div className="Item-conatiner">
       <div className="left-item-container">
         <h6>{product_title}</h6>
         <p>{pack_size}</p>
-        <div className="remove-div" onClick={() => handleDelete(id)}>
-          <img src="https://img.1mg.com/images/delete_icon.svg" alt="remove" />{" "}
-          <p>Remove</p>
+        <div className="remove-div" onClick={() => handleDelete(_id,token)}>
+          <img src="https://img.1mg.com/images/delete_icon.svg" alt="remove" />
+          <p style={{marginTop:"15px"}}>Remove</p>
         </div>
       </div>
       <div className="right-item-container">
