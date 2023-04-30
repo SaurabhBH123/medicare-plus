@@ -1,5 +1,4 @@
-# rebel-snow-4871
-It is a clone of Tata1Mg.com. Tata 1Mg is e-commerce platform for pharma products.
+
 <h1 align="center">Medicare Plus</h1>
 <h2 align="center">Medicare Plus is a clone of Tata1mg.com. Tata 1Mg is an e-commerce platform for pharma products.</h2>
 
